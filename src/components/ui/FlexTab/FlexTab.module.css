@@ -1,0 +1,22 @@
+.root {
+  @apply overflow-x-auto relative flex gap-x-5 rounded-[10px] bg-smoky-black/60 w-fit py-2 px-4;
+  & > * {
+    @apply inline-block relative text-center py-1 px-2;
+
+    &:before {
+      display: block;
+      content: attr(title);
+      font-weight: bold;
+      height: 1px;
+      color: transparent;
+    }
+  }
+
+  & > .active {
+    @apply rounded-md bg-raisin-black;
+  }
+
+  span {
+    @apply whitespace-nowrap;
+  }
+}

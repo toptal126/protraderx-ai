@@ -1,0 +1,27 @@
+.root {
+  --tab-nav-items: 2;
+
+  @apply relative flex gap-x-10;
+  & > * {
+    @apply inline-block relative text-center;
+
+    &:before {
+      display: block;
+      content: attr(title);
+      font-weight: bold;
+      height: 1px;
+      color: transparent;
+    }
+  }
+
+  & > .active {
+    @apply font-bold;
+
+    &:after {
+      content: "";
+      margin-top: 10px;
+      animation-duration: 0.3s !important;
+      @apply block border-b-2 border-tangerine-yellow animate-enter;
+    }
+  }
+}

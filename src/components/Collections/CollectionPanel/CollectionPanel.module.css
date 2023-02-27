@@ -1,0 +1,80 @@
+.root {
+  @apply flex flex-col;
+
+  .collectionInfo {
+    @apply p-2 md:px-5 md:py-6 bg-raisin-black md:grid;
+    grid-template-columns: 30px 26fr 16fr 13fr 14fr 5fr 23fr;
+
+    & > div {
+      @apply hidden md:flex items-center gap-1.5;
+
+      .label {
+        @apply md:hidden opacity-70 mr-auto;
+      }
+    }
+
+    & > div:first-child {
+      @apply hidden md:flex justify-center;
+    }
+
+    & > div:nth-child(2) {
+      @apply flex;
+    }
+
+    & > div:last-child {
+      @apply flex justify-between md:justify-end;
+
+      & > a > button:first-child {
+        @apply mr-6 md:h-10 md:w-36 gap-x-1.5;
+      }
+    }
+
+    .nftImg {
+      img {
+        @apply mr-3 rounded;
+        border: 1px solid rgba(245, 245, 245, 0.5);
+
+        @apply w-[120px] h-[120px];
+        @screen md {
+          @apply w-[60px] h-[60px];
+        }
+      }
+
+      .collectionName {
+        @apply flex items-center gap-x-1 md:gap-x-2 font-bold;
+
+        display: inline-block;
+        max-width: 120px;
+        white-space: nowrap;
+        overflow: hidden !important;
+        text-overflow: ellipsis;
+
+        @screen md {
+          max-width: 180px;
+        }
+      }
+    }
+  }
+
+  .poolDetails {
+    @apply flex flex-col bg-raisin-black duration-150;
+
+    & > hr {
+      @apply md:hidden opacity-70;
+    }
+
+    .header {
+      @apply hidden md:grid items-center px-7 py-2.5;
+      background: rgba(255, 255, 255, 0.15);
+      grid-template-columns: 20% 25% 13% 13% 29%;
+
+      & > div:first-child {
+        @apply pl-9;
+      }
+    }
+  }
+}
+
+.chart_tooltip {
+  @apply bg-white px-4 py-2 rounded-lg shadow-lg text-black;
+}

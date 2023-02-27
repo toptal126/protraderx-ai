@@ -1,0 +1,52 @@
+.root {
+  @apply flex flex-col rounded-[10px] bg-smoky-black p-2 md:p-10 animate-enter;
+
+  .heading {
+    @apply flex items-center justify-between font-bold;
+    span {
+      @apply flex items-center text-tangerine-yellow gap-2.5 cursor-pointer;
+    }
+  }
+
+  .collection {
+    @apply flex flex-col md:flex-row py-6 gap-x-20;
+
+    .nftImg {
+      @apply w-[360px];
+      border: 1px solid rgba(245, 245, 245, 0.5);
+      border-radius: 4px;
+
+      @screen 2xl {
+        @apply w-[480px] h-[480px];
+      }
+    }
+
+    .sellections {
+      @apply flex flex-col gap-y-4 md:gap-y-8 justify-center pt-4 md:pt-0;
+
+      & > div {
+        @apply flex items-center;
+
+        & > div > input {
+          @apply ml-4 w-28;
+        }
+      }
+
+      .duration {
+        @apply gap-x-4;
+      }
+    }
+  }
+
+  .warnings {
+    @apply flex flex-col gap-y-4;
+
+    & > div {
+      @apply flex gap-x-2;
+    }
+  }
+
+  .buttons {
+    @apply flex gap-x-10 pt-6;
+  }
+}

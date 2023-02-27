@@ -1,0 +1,37 @@
+.root {
+  @apply flex flex-col bg-raisin-black rounded-[10px];
+
+  @apply w-[90vw];
+
+  @screen md {
+    @apply w-[430px];
+  }
+
+  .header {
+    @apply flex justify-between mx-2 md:mx-6 py-2 md:py-7 items-center text-xl font-bold;
+  }
+
+  .body {
+    @apply my-4 px-6 flex flex-col items-center;
+
+    & > svg {
+      @apply mb-6;
+    }
+
+    & > a {
+      @apply flex items-center font-bold text-tangerine-yellow;
+
+      svg {
+        @apply ml-2.5;
+      }
+    }
+  }
+
+  .footer {
+    @apply flex m-6;
+
+    button {
+      @apply h-10 w-full;
+    }
+  }
+}

@@ -1,0 +1,68 @@
+.root {
+  @apply flex flex-col gap-2 md:gap-8;
+
+  .heading {
+    @apply flex justify-between items-start;
+    p {
+      @apply mt-2 md:mt-7;
+    }
+  }
+
+  .loaninfo {
+    @apply md:flex gap-16;
+
+    .status {
+      @apply flex-1 flex bg-smoky-black rounded-[10px] p-3 md:p-7;
+
+      .currentloans {
+        @apply flex-1 border-r border-[#F5F5F580] mr-3 md:mr-7;
+      }
+
+      .nftlocked {
+        @apply flex-1;
+      }
+    }
+
+    .summary {
+      @apply flex flex-col bg-smoky-black rounded-[10px] p-3 md:px-7 md:pt-7 mt-2 md:mt-0;
+    }
+
+    .status > div,
+    .summary > div {
+      @apply flex flex-col;
+
+      .info {
+        @apply flex items-center font-bold mt-6 mb-4;
+
+        svg {
+          @apply ml-4 w-7 h-7;
+        }
+      }
+
+      .addition {
+        @apply flex items-center gap-x-4;
+        p {
+          @apply opacity-50;
+        }
+
+        button {
+          @apply w-[140px] h-10 ml-12;
+        }
+      }
+    }
+  }
+
+  .navtab {
+    @apply mb-2 md:mb-5 overflow-x-auto;
+
+    & > * {
+      .badge {
+        @apply text-sm rounded-md bg-tangerine-yellow text-black px-1 ml-2 font-normal;
+      }
+
+      .ribbon {
+        @apply text-sm absolute right-0 top-0 rounded-md bg-tangerine-yellow text-black px-1 ml-2 font-normal translate-x-1/2 -translate-y-1/2;
+      }
+    }
+  }
+}

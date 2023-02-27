@@ -1,0 +1,7 @@
+.root {
+  @apply text-tangerine-yellow flex items-center gap-1.5 cursor-pointer;
+
+  .busy {
+    @apply animate-rotate;
+  }
+}

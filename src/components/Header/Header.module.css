@@ -1,0 +1,16 @@
+.root {
+  @apply flex items-center pl-4 pr-4 border-b text-white border-b-[#F5F5F580] bg-[#6068C5];
+  @screen md {
+    @apply pl-[60px] pr-8;
+  }
+
+  .logo {
+    background-image: url("assets/images/svg-logo.png");
+    @apply my-2 mr-auto h-12 w-12 bg-contain;
+
+    @screen md {
+      background-image: url("assets/images/svg-logo-text.png");
+      @apply my-6 w-[192px] h-[47px];
+    }
+  }
+}

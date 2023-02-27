@@ -1,0 +1,14 @@
+.root {
+  @apply flex flex-col;
+  .heading {
+    @apply flex items-center font-bold mb-10;
+
+    button {
+      @apply ml-auto md:h-10 md:w-[140px] md:text-xl;
+    }
+  }
+
+  .navtab {
+    @apply md:text-xl mb-5;
+  }
+}

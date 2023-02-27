@@ -1,0 +1,13 @@
+.switch {
+  @apply relative inline-flex items-center h-5 w-10 rounded-full duration-150;
+  padding: unset;
+
+  .thumb {
+    @apply duration-150 inline-block aspect-square h-5 bg-white transform rounded-full;
+  }
+  &:hover {
+    .thumb {
+      box-shadow: 0 0 2px 3px #37ab45;
+    }
+  }
+}

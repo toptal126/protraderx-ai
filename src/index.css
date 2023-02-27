@@ -1,0 +1,185 @@
+@import url("https://fonts.googleapis.com/css2?family=Chakra+Petch:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+  overflow-y: scroll;
+}
+
+body {
+  font-family: "Chakra Petch", sans-serif;
+  color: #342fff;
+}
+
+::-webkit-scrollbar {
+  background-color: #424242;
+  width: 7px;
+  height: 7px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #fff2;
+  border-radius: 100px;
+  border: 1px solid #fff5;
+  &:hover {
+    pointer: cursor;
+    background-color: #fff5;
+  }
+}
+
+@layer base {
+  .main-container {
+    @apply overflow-x-hidden;
+
+    &:before {
+      content: "";
+      @apply w-full h-full absolute z-[-1] opacity-30 bg-no-repeat;
+      background-image: url("assets/images/block-bg.png");
+    }
+    &:after {
+      content: "";
+      @apply w-full h-full bottom-0 right-0 absolute z-[-1] opacity-30 bg-no-repeat;
+      background-position: right -100px bottom -200px;
+      background-image: url("assets/images/block-bg.png");
+    }
+  }
+
+  main {
+    min-height: calc(100vh - 129px);
+
+    @screen md {
+      min-height: calc(100vh - 157px);
+    }
+    @apply py-2 px-2;
+
+    @screen sm {
+      @apply px-[2rem];
+    }
+
+    @screen xl {
+      @apply px-[5rem] py-8;
+    }
+    @screen 2xl {
+      @apply px-[7.5rem] py-10;
+    }
+
+    & > * {
+      @apply animate-enter origin-top;
+    }
+  }
+
+  *:disabled {
+    cursor: not-allowed;
+  }
+  h3 {
+    @apply text-[24px] font-bold;
+
+    @screen md {
+      @apply text-[34px];
+    }
+  }
+  h4 {
+    @apply text-xl font-bold;
+  }
+  textarea {
+    @apply bg-transparent border border-white rounded-md p-2;
+  }
+
+  select {
+    @apply bg-transparent border border-white rounded-md p-1;
+    option {
+      @apply bg-black;
+    }
+  }
+
+  hr {
+    @apply w-full bg-white;
+  }
+
+  [type="radio"]:checked,
+  [type="checkbox"]:checked {
+    background-image: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTIiIGhlaWdodD0iMTQiIHZpZXdCb3g9IjAgMCAxMiAxNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTIuMTk3NDIgOS42OEgwLjQ1NzQyMlY3LjQ0SDMuODc3NDJMNS4xNTc0MiAxMC45NEg1LjI3NzQyTDkuMjk3NDIgLTkuNTM2NzRlLTA3SDExLjkzNzRMNi42Mzc0MiAxNEgzLjg3NzQyTDIuMTk3NDIgOS42OFoiIGZpbGw9IndoaXRlIi8+Cjwvc3ZnPgo=);
+    background-position: 50%;
+    background-repeat: no-repeat;
+    background-size: 60% 60%;
+    /* border-color: transparent; */
+  }
+
+  [type="checkbox"],
+  [type="radio"] {
+    @apply focus:border-white cursor-pointer;
+    print-color-adjust: exact;
+    --tw-shadow: 0 0 #0000;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background-position: 50%;
+    background-size: 0% 0%;
+    /* background-color: #fff; */
+    background-origin: border-box;
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 4px;
+    color: #1c64f2;
+    display: inline-block;
+    flex-shrink: 0;
+    padding: 0;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    vertical-align: middle;
+
+    width: 20px;
+    height: 20px;
+    @screen md {
+      width: 30px;
+      height: 30px;
+    }
+  }
+
+  .tooltip-container {
+    @apply relative cursor-pointer;
+
+    .tooltip {
+      @apply hidden absolute animate-fadeIn duration-300;
+      @apply px-2 py-1 w-max bg-white rounded-md text-black z-[5];
+    }
+    .tooltip.top {
+      @apply top-0 -translate-y-[calc(100%+10px)] -translate-x-1/2 left-1/2;
+      &::before {
+        content: "";
+        width: 0;
+        height: 0;
+        border-left: 8px solid transparent;
+        border-right: 8px solid transparent;
+        border-top: 8px solid white;
+        bottom: -7px;
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+      }
+    }
+    .tooltip.right {
+      @apply right-0 top-1/2 -translate-y-1/2 translate-x-[calc(100%+15px)];
+      &::before {
+        content: "";
+        width: 0;
+        height: 0;
+        border-top: 8px solid transparent;
+        border-bottom: 8px solid transparent;
+        border-right: 8px solid white;
+        left: -7px;
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+      }
+    }
+    &:hover {
+      .tooltip {
+        @apply flex;
+      }
+    }
+  }
+}

@@ -1,0 +1,27 @@
+.root {
+  @apply flex flex-col animate-enter;
+
+  .items {
+    @apply grid grid-cols-2 md:grid-cols-4 xl:grid-cols-5 gap-4 md:gap-8 mb-20 mt-8;
+
+    .itemWrapper {
+      @apply flex flex-col rounded-[10px] overflow-hidden bg-smoky-black/60 shadow-xl cursor-pointer;
+
+      img {
+        @apply w-full aspect-square;
+      }
+
+      .symbol {
+        @apply pl-4 py-2 text-xl;
+      }
+
+      .actions {
+        @apply ml-auto mr-4 mb-3;
+
+        button {
+          @apply w-8 h-8 bg-transparent hover:bg-white/10;
+        }
+      }
+    }
+  }
+}

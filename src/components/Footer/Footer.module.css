@@ -1,0 +1,23 @@
+.root {
+  @apply flex px-2 h-16 items-center text-white/50 mb-14 md:mb-0;
+  @screen md {
+    @apply px-[60px];
+  }
+
+  .externalLinks {
+    @apply hidden md:flex ml-8 gap-5;
+    svg {
+      @apply fill-white/50;
+    }
+    svg:hover {
+      @apply fill-white;
+    }
+  }
+  .navlinks {
+    @apply hidden md:flex ml-auto gap-8 font-bold;
+
+    a:hover {
+      @apply text-white;
+    }
+  }
+}

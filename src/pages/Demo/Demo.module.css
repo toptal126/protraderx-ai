@@ -1,0 +1,45 @@
+.root {
+  @apply p-8 flex flex-col;
+  .contracts {
+    @apply flex gap-4 mt-4;
+
+    .contract {
+      @apply flex-1 p-4 border-emerald-600 border-2 flex flex-col items-start gap-2;
+
+      .poolConfig,
+      .adminSettings,
+      .poolsBox,
+      .loanConfig {
+        @apply w-full flex flex-col items-start gap-2 p-4 border-2 bg-[#0D0D0D] border-slate-600;
+
+        .pool {
+          @apply flex flex-col w-full p-2 gap-1 bg-[#554609];
+
+          span {
+            @apply flex items-center gap-1;
+          }
+        }
+        .loan {
+          @apply flex flex-col w-full p-2 gap-1 bg-[#554609];
+
+          span {
+            @apply flex items-center gap-1;
+          }
+        }
+        .inputItem {
+          @apply flex items-center gap-4;
+          label {
+            @apply whitespace-nowrap;
+          }
+          & > div {
+            @apply w-60;
+          }
+        }
+      }
+    }
+  }
+}
+
+.stressed {
+  @apply font-bold underline underline-offset-4;
+}

@@ -1,0 +1,89 @@
+.root {
+  .land {
+    @apply flex gap-12 py-8 justify-center;
+    & > div {
+      @apply flex flex-col justify-between pt-16 w-[545px];
+      .title {
+        @apply text-[40px] font-bold;
+      }
+      .subTitle {
+        @apply text-6xl font-bold text-tangerine-yellow leading-tight;
+      }
+      .content {
+        @apply text-white/50;
+      }
+      .buttonBar {
+        @apply flex gap-6 font-bold;
+      }
+    }
+  }
+  .state {
+    @apply flex pt-36 pb-48 justify-center gap-8 font-bold;
+    & > div {
+      position: relative;
+      background: rgb(105, 81, 29);
+      @apply flex flex-col w-96 p-7 h-44 gap-4
+        overflow-hidden rounded-[10px] cursor-pointer;
+      & > div {
+        @apply flex gap-4 items-center z-[1];
+        .value {
+          @apply flex text-[30px]  items-center;
+          svg {
+            @apply ml-2;
+          }
+        }
+      }
+
+      &::after {
+        content: "";
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        left: 0;
+        top: 0;
+        @apply bg-black/80 duration-100;
+      }
+
+      &:hover {
+        filter: drop-shadow(8px 8px 4px rgba(0, 0, 0, 0.25));
+        &::after {
+          @apply bg-transparent;
+        }
+      }
+
+      .img {
+        @apply absolute h-full top-0 right-4;
+      }
+    }
+  }
+  .carousel {
+    background-image: url("assets/images/png/carousel.png");
+    background-repeat: no-repeat;
+    background-size: 100%;
+    @apply -mx-[7.5rem];
+    .title {
+      @apply text-center text-4xl py-10 font-bold;
+    }
+    .arrow {
+      @apply bg-white/50 w-8 h-8 flex justify-center items-center rounded-full absolute top-1/2 -translate-y-[48px] cursor-pointer;
+    }
+    .Left {
+      @apply right-20;
+    }
+    .Right {
+      @apply left-20;
+    }
+    .dots {
+      @apply flex justify-center py-8;
+    }
+    .dot {
+      @apply border-none w-[10px] h-[10px] bg-[#c5c5c5] rounded-full mx-[5px] p-[5px] cursor-pointer;
+      &:focus {
+        @apply outline-none;
+      }
+    }
+    .active {
+      @apply bg-tangerine-yellow;
+    }
+  }
+}

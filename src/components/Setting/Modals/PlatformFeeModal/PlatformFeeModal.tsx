@@ -1,0 +1,60 @@
+import style from "./PlatformFeeModal.module.css";
+import cn from "classnames";
+// import { useSettingStore } from "store";
+import { AceModal, Button, Input } from "components/ui";
+import { useRef } from "react";
+import CloseButton from "components/ui/CloseButton";
+import { toInteger } from "utils/helpers/string.helpers";
+
+interface IProps {
+  input: string;
+  onConfirm: any;
+  visible: boolean;
+  setVisible: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+const PlatformFeeModal = ({
+  input,
+  onConfirm,
+  visible,
+  setVisible,
+}: IProps) => {
+  const addressRef = useRef<HTMLInputElement>(null);
+  // const { setting } = useSettingStore();
+
+  return (
+    <AceModal modalVisible={visible} setModalVisible={setVisible}>
+      <div className={cn(style.root)}>
+        <div className={cn(style.header)}>
+          Platform Fee
+          <CloseButton setModalVisible={setVisible} />
+        </div>
+        <div className={cn(style.body)}>
+          <span>Platform Fee % Now: </span>
+          <span className={cn(style.value)}>{toInteger(input) / 100}%</span>
+          <span>Change to:</span>
+          <Input
+            innerRef={addressRef}
+            placeholder="4.65%"
+            defaultValue={toInteger(input) / 100}
+            icon={<span className="font-bold">%</span>}
+            // onChange={(e) => setInput(e.target.value)}
+          />
+        </div>
+        <div className={cn(style.footer)}>
+          <Button variant="gray" onClick={() => setVisible(false)}>
+            Cancel
+          </Button>
+          <Button
+            variant="yellow"
+            onClick={() => onConfirm(addressRef.current?.value)}
+          >
+            Save
+          </Button>
+        </div>
+      </div>
+    </AceModal>
+  );
+};
+
+export default PlatformFeeModal;

@@ -1,0 +1,17 @@
+.root {
+  @apply relative;
+  .input {
+    @apply w-full rounded-full flex duration-100 font-bold bg-white/10 border border-white/50 outline-none;
+    @apply pl-2.5 pr-5 py-1;
+    @screen md {
+      @apply pl-5 pr-10 py-2;
+    }
+  }
+
+  .icon {
+    @apply absolute top-1/2 -translate-y-1/2 right-2 font-bold;
+    @screen md {
+      @apply right-4;
+    }
+  }
+}

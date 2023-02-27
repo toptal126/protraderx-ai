@@ -1,0 +1,71 @@
+.root {
+  @apply bg-smoky-black rounded-[10px] p-2 md:p-5 animate-enter;
+
+  .header {
+    @apply flex md:grid items-center px-2 py-1 md:py-3 md:px-5 font-bold;
+    grid-template-columns: 30px 28% 1fr 1fr;
+
+    & > *:first-child {
+      @apply flex;
+    }
+
+    & > * {
+      @apply hidden md:flex;
+    }
+
+    & > *:last-child {
+      @apply flex ml-auto md:h-10 md:w-[140px];
+    }
+  }
+
+  .collections {
+    @apply flex flex-col gap-y-2.5 mt-2 md:mt-4;
+
+    .row {
+      @apply flex flex-col md:grid items-center py-3 px-5 bg-raisin-black;
+      grid-template-columns: 30px 28% 1fr 1fr;
+
+      & > *:first-child {
+        @apply hidden md:flex;
+      }
+
+      .avatar {
+        @apply flex items-center gap-x-2.5;
+        img {
+          @apply rounded md:w-[60px] md:h-[60px] w-[120px] h-[120px];
+          border: 1px solid rgba(245, 245, 245, 0.5);
+        }
+
+        & > span {
+          @apply hidden md:block font-bold;
+        }
+
+        & > div {
+          @apply flex flex-col md:hidden;
+
+          .address {
+            @apply flex items-center;
+            svg {
+              @apply ml-2;
+            }
+          }
+        }
+      }
+
+      & > .address {
+        @apply hidden md:flex items-center;
+        svg {
+          @apply ml-2;
+        }
+      }
+
+      & > .actions {
+        @apply flex justify-end items-center gap-x-2 mt-2 md:mt-0;
+
+        button {
+          @apply bg-white/30 hover:bg-white/40 h-10 w-10;
+        }
+      }
+    }
+  }
+}

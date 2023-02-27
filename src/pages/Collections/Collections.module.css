@@ -1,0 +1,29 @@
+.root {
+  @apply flex flex-col gap-2 md:gap-8;
+
+  .heading {
+    & > div:first-child {
+      @apply flex justify-between items-center;
+    }
+    p {
+      @apply mt-3 md:mt-7;
+    }
+  }
+
+  .collectionList {
+    @apply flex flex-col gap-[10px] bg-smoky-black p-2 md:px-5 md:pb-5 md:pt-7 rounded-[10px];
+
+    .head {
+      @apply font-bold p-2 md:px-5 md:pb-6 flex justify-between md:grid;
+      grid-template-columns: 30px 26fr 16fr 13fr 14fr 19fr 9fr;
+
+      & > span {
+        @apply hidden md:flex items-center gap-1.5;
+      }
+
+      & > span:last-child {
+        @apply flex text-tangerine-yellow justify-end;
+      }
+    }
+  }
+}

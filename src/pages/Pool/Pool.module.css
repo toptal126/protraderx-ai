@@ -1,0 +1,63 @@
+.root {
+  @apply flex flex-col animate-enter;
+  .heading {
+    @apply flex flex-wrap items-center font-bold mb-2 md:mb-10;
+
+    h3 {
+      @apply mx-2 md:mx-8;
+    }
+
+    .link {
+      @apply flex items-center md:text-xl gap-2 text-tangerine-yellow ml-auto md:ml-0;
+    }
+
+    button:last-child {
+      @apply ml-auto md:w-[140px] md:h-10;
+    }
+  }
+
+  .poolPanel {
+    @apply bg-smoky-black rounded-[10px] p-2 md:px-5 md:pt-6 md:pb-8;
+
+    .head {
+      @apply font-bold px-2 md:px-5 pb-2 md:pb-6 md:grid;
+      grid-template-columns: 20% 25% 10% 11% 16% 18%;
+
+      & > *:first-child {
+        @apply flex;
+      }
+
+      & > span {
+        @apply hidden md:flex items-center gap-1.5;
+      }
+
+      & > span:last-child {
+        @apply text-tangerine-yellow justify-end;
+      }
+    }
+  }
+
+  .loanHeading {
+    @apply hidden md:flex pl-2 mt-10 mb-4;
+  }
+
+  .loanPanel {
+    @apply bg-smoky-black rounded-[10px] p-2 md:px-5 md:pt-6 md:pb-8 flex flex-col gap-y-2.5 my-4;
+
+    .head {
+      @apply font-bold p-2 md:px-5 md:pb-6 md:grid;
+      grid-template-columns: 23% 10% 15% 10% 11% 16% 15%;
+
+      & > *:first-child {
+        @apply flex;
+      }
+      & > span {
+        @apply hidden md:flex items-center gap-1.5;
+      }
+
+      & > span:last-child {
+        @apply text-tangerine-yellow justify-end;
+      }
+    }
+  }
+}

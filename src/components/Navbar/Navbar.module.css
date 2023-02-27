@@ -1,0 +1,7 @@
+.root {
+  @apply overflow-x-auto fixed bottom-0 flex md:hidden items-center justify-center w-full border-t border-b-[#F5F5F580] bg-raisin-black;
+
+  .link {
+    @apply font-bold text-xl px-4 py-3 hover:bg-tangerine-yellow/50;
+  }
+}

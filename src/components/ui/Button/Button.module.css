@@ -1,0 +1,12 @@
+.button {
+  @apply rounded-full flex items-center justify-center duration-100 font-bold;
+  @apply px-2 py-1;
+
+  &:hover {
+    @apply shadow-lg;
+  }
+
+  &:disabled {
+    @apply opacity-50;
+  }
+}

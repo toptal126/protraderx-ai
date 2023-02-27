@@ -1,0 +1,23 @@
+.root {
+  @apply bg-smoky-black rounded-[10px] p-2 md:px-5 md:pt-6 md:pb-8 flex flex-col gap-y-2.5 animate-enter;
+
+  .head {
+    @apply font-bold p-2 md:px-5 md:pb-6 flex justify-between md:grid;
+    grid-template-columns: 23% 10% 15% 10% 11% 16% 15%;
+
+    & > *:first-child {
+      @apply flex;
+    }
+    & > * {
+      @apply hidden md:flex items-center gap-1.5;
+    }
+
+    & > *:last-child {
+      @apply flex text-tangerine-yellow justify-end;
+    }
+  }
+
+  .empty {
+    @apply py-10 text-center opacity-50;
+  }
+}

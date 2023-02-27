@@ -1,0 +1,81 @@
+.root {
+  @apply flex flex-col w-fit mx-auto;
+
+  .heading {
+    @apply flex items-center;
+  }
+
+  .panel {
+    @apply flex flex-col bg-smoky-black px-2 py-2 rounded-[10px];
+
+    @screen md {
+      @apply px-10 py-5;
+    }
+
+    & > span {
+      @apply font-medium mt-5 w-fit;
+    }
+
+    .choice {
+      @apply flex items-center;
+
+      .buttons {
+        @apply ml-auto font-bold;
+
+        & > span {
+          @apply cursor-pointer hover:opacity-70 ml-2;
+        }
+      }
+    }
+
+    .collateral {
+      @apply flex items-center bg-raisin-black rounded-[10px]  mt-5;
+    }
+    .receive {
+      @apply flex items-center;
+      .coins {
+        @apply flex items-center gap-x-3 mr-auto;
+
+        svg {
+          @apply cursor-pointer hover:grayscale-0 duration-150;
+        }
+      }
+
+      span {
+        @apply mr-2 cursor-pointer hover:opacity-70;
+      }
+
+      input {
+        @apply w-28 md:w-40;
+      }
+    }
+
+    .duration {
+      @apply flex justify-end mt-2;
+    }
+
+    .loanlist {
+      @apply flex flex-col gap-y-3 mt-6;
+
+      .showmore {
+        @apply flex items-center mx-auto hover:bg-raisin-black cursor-pointer duration-150 px-2 py-1 rounded-md animate-enter;
+      }
+
+      & > div:first-child {
+        @apply border-2 border-tangerine-yellow relative;
+        &:before {
+          content: "Best Pool";
+          @apply absolute bg-tangerine-yellow text-black font-medium px-2 rounded-md -top-4 -left-2;
+        }
+        &:after {
+          content: "";
+          @apply absolute w-full h-full left-0 top-0 rounded-lg bg-gradient-to-r from-[#F0C220] to-[#9ee0f5] opacity-10;
+        }
+      }
+    }
+
+    .noloans {
+      @apply py-8 md:py-16 bg-raisin-black rounded-[10px] mt-3 flex justify-center text-center;
+    }
+  }
+}

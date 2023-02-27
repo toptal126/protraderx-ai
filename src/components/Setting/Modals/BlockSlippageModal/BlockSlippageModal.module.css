@@ -1,0 +1,30 @@
+.root {
+  @apply flex flex-col w-[550px] h-[360px] bg-raisin-black rounded-[10px];
+
+  .header {
+    @apply flex justify-between mx-6 py-7 items-center text-xl font-bold;
+  }
+
+  .body {
+    @apply my-auto px-6 flex flex-col;
+
+    span {
+      @apply mb-2.5;
+    }
+
+    .value {
+      @apply flex items-center font-bold mb-10;
+      svg {
+        @apply ml-1.5;
+      }
+    }
+  }
+
+  .footer {
+    @apply flex justify-center gap-x-10 my-8;
+
+    button {
+      @apply h-10 w-[140px];
+    }
+  }
+}

@@ -1,0 +1,63 @@
+.root {
+  @apply flex flex-col rounded-[10px] bg-smoky-black p-2 md:p-10 animate-enter;
+
+  .heading {
+    @apply flex flex-col;
+
+    span {
+      @apply mt-4;
+    }
+  }
+
+  .controls {
+    @apply md:flex gap-x-14 mt-7;
+
+    & > div {
+      @apply flex-1 flex flex-col gap-y-2 md:gap-y-7;
+
+      .label {
+        @apply text-tangerine-yellow font-bold;
+      }
+
+      .form {
+        @apply flex items-center gap-x-3.5 justify-between md:justify-start;
+
+        input {
+          @apply w-28 md:w-[180px];
+        }
+
+        .info {
+          @apply font-bold hidden md:flex items-center gap-x-1.5;
+        }
+
+        .tooltip {
+          /* @apply text-center; */
+          max-width: 330px;
+        }
+      }
+
+      .chart {
+        @apply w-full md:w-3/4 h-[190px];
+
+        & > div {
+          @apply -translate-x-8;
+        }
+      }
+    }
+  }
+
+  .term {
+    @apply flex items-center mt-4 gap-x-4 justify-between md:justify-start;
+  }
+  .footer {
+    @apply flex gap-10 mt-8;
+
+    button {
+      @apply w-[140px] h-10;
+    }
+  }
+}
+
+.chart_tooltip {
+  @apply bg-white px-4 py-2 rounded-lg shadow-lg text-black;
+}

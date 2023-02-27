@@ -1,0 +1,13 @@
+.root {
+  @apply fixed overflow-hidden w-screen h-full top-0 left-0 flex-col items-center;
+  z-index: 1;
+
+  .overlay {
+    @apply overflow-hidden w-screen h-full bg-black/60 absolute top-0 left-0 animate-fadeIn;
+  }
+
+  .main {
+    @apply h-full flex items-center animate-enter;
+    z-index: 10;
+  }
+}

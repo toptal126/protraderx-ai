@@ -1,0 +1,114 @@
+.root {
+  @apply flex flex-col gap-2 md:gap-8;
+
+  .heading {
+    @apply flex flex-wrap justify-between items-center font-bold relative;
+
+    .platformStatus {
+      @apply rounded-full bg-tangerine-yellow/50 px-8 py-3 text-exs gap-10 flex;
+
+      div {
+        @apply gap-[10px] flex;
+      }
+    }
+  }
+
+  .help {
+    @apply flex flex-col md:flex-row;
+    a {
+      @apply ml-auto md:ml-4 text-tangerine-yellow flex items-center gap-2;
+    }
+  }
+
+  .poolList {
+    @apply flex flex-col gap-1 md:gap-[10px] bg-smoky-black p-2 md:px-5 md:pb-5 md:pt-7 rounded-[10px];
+
+    .head {
+      @apply font-bold px-2 pb-2 md:px-5 md:pb-6 flex md:grid;
+      grid-template-columns: 20% 25% 10% 11% 16% 18%;
+
+      span {
+        @apply hidden md:flex items-center gap-1.5;
+      }
+
+      span:last-child {
+        @apply text-tangerine-yellow justify-end flex ml-auto;
+      }
+    }
+
+    .poolPanel {
+      @apply flex flex-col;
+
+      .poolInfo {
+        @apply px-5 py-6 bg-raisin-black grid;
+        grid-template-columns: 20% 25% 10% 11% 16% 18%;
+
+        span {
+          @apply flex items-center gap-1.5;
+        }
+        span:last-child {
+          @apply justify-between;
+        }
+      }
+      .poolDetails {
+        @apply flex flex-col bg-raisin-black;
+
+        .loanInfo {
+          @apply px-5 py-2 bg-white/10 flex gap-24;
+
+          div {
+            @apply flex items-center gap-2;
+            span:first-child {
+              @apply opacity-50;
+            }
+
+            span:last-child {
+              @apply font-bold flex items-center gap-2;
+            }
+          }
+        }
+
+        .loanDetails {
+          @apply flex pt-6 pb-4 pl-5 pr-9 gap-24;
+
+          .interestInfo {
+            & > div {
+              @apply flex gap-9 pb-6;
+              div {
+                @apply flex gap-2;
+                span:first-child {
+                  @apply opacity-50;
+                }
+                span:last-child {
+                  @apply font-bold;
+                }
+              }
+            }
+          }
+
+          .collectionsInfo {
+            @apply flex flex-col gap-5;
+
+            .collectionsCount {
+              @apply flex gap-2;
+              span:first-child {
+                @apply opacity-50;
+              }
+              span:last-child {
+                @apply font-bold;
+              }
+            }
+
+            .collectionsList {
+              @apply flex flex-wrap gap-4;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .empty {
+    @apply py-32 text-center opacity-50;
+  }
+}

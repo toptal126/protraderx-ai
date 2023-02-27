@@ -1,0 +1,84 @@
+.root {
+  @apply flex flex-col;
+
+  .poolInfo {
+    @apply p-2 md:px-5 md:py-6 bg-raisin-black flex flex-col md:grid;
+    grid-template-columns: 20% 25% 10% 11% 16% 18%;
+
+    & > span {
+      .label {
+        @apply flex md:hidden mr-auto opacity-70;
+      }
+      @apply flex items-center gap-1.5 px-4 md:px-0;
+
+      .avatar {
+        @apply w-8 h-8 rounded-full bg-white/5 ml-0 mr-1;
+      }
+    }
+    & > span:last-child {
+      @apply justify-between mt-2 md:mt-0;
+    }
+  }
+  .poolDetails {
+    @apply flex flex-col bg-raisin-black duration-150;
+
+    .loanInfo {
+      @apply px-6 py-2 bg-smoky-black flex flex-col md:flex-row gap-x-2 md:gap-24;
+      div {
+        @apply flex items-center gap-2 font-bold;
+        span:first-child {
+          @apply text-white;
+        }
+
+        span:last-child {
+          @apply flex items-center gap-2 ml-auto;
+        }
+      }
+    }
+
+    .loanDetails {
+      @apply flex flex-col md:flex-row gap-x-24;
+      @apply py-2 px-6;
+      @screen md {
+        @apply pt-6 pb-4 pl-5 pr-9;
+      }
+
+      .interestInfo {
+        .figures {
+          @apply flex flex-col md:flex-row pb-2;
+        }
+        .chart {
+          @apply -translate-x-8 md:w-3/4 h-[190px];
+        }
+        & > div {
+          @apply flex gap-x-9 md:pb-6;
+          div {
+            @apply flex gap-2;
+            span:last-child {
+              @apply font-bold;
+            }
+          }
+        }
+      }
+
+      .collectionsInfo {
+        @apply flex flex-col gap-5;
+
+        .collectionsCount {
+          @apply flex gap-2;
+          span:last-child {
+            @apply font-bold;
+          }
+        }
+
+        .collectionsList {
+          @apply flex flex-wrap gap-4;
+        }
+      }
+    }
+  }
+}
+
+.chart_tooltip {
+  @apply bg-white px-4 py-2 rounded-lg shadow-lg text-black;
+}
