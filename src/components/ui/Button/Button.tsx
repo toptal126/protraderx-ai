@@ -11,7 +11,7 @@ const extractGradientFromVariant = (variant: ButtonVariant) => {
   return {
     yellow: "text-white bg-tangerine-yellow",
     gray: "bg-white text-tangerine-yellow",
-    blue: "bg-smoky-black",
+    blue: "bg-smoky-black text-[#342FFF]",
   }[variant];
 };
 

@@ -60,6 +60,7 @@ module.exports = {
         gray: {
           1000: '#242424',
         },
+        "pro-blue": "#342FFF",
         "dark-charcoal": "#313131",
         "tangerine-yellow": "#37AB45",
         "granite-gray": "#666666",

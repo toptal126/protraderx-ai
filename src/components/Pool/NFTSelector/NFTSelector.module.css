@@ -10,7 +10,7 @@
     }
   }
   .selection {
-    @apply flex items-center p-1 w-full rounded-lg border border-tangerine-yellow  z-10 cursor-pointer;
+    @apply bg-raisin-black flex items-center p-1 w-full rounded-lg border border-tangerine-yellow  z-10 cursor-pointer;
 
     @screen md {
       @apply w-[460px] p-2.5;
@@ -83,18 +83,17 @@
     top: calc(100% - 8px);
 
     .searchBox {
-      @apply flex flex-col mt-4 md:mt-8 px-2 md:px-5 py-1 md:pt-2 md:pb-3.5;
-      background: rgba(255, 255, 255, 0.15);
+      @apply flex flex-col mt-4 md:mt-8 px-2 md:px-5 py-1 md:pt-2 md:pb-3.5 bg-smoky-black;
 
       .count {
-        @apply flex items-center;
+        @apply flex items-center text-white font-bold;
         svg {
           @apply mr-2;
         }
       }
 
       input {
-        @apply mt-2 border-white/50 !important;
+        @apply mt-2 !important;
       }
     }
 

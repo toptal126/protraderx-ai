@@ -1,5 +1,5 @@
 .root {
-  @apply relative;
+  @apply relative text-[#342FFF];
   .button {
     @apply w-[140px] h-10 rounded-full bg-[#BBC7F9] flex items-center justify-center relative text-[14px] font-bold gap-1.5;
 

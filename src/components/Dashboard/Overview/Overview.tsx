@@ -1,97 +1,44 @@
-import { useMemo } from "react";
 import style from "./Overview.module.css";
 import cn from "classnames";
-import { useAccountStore } from "store";
-import { beautifyDecimals, formatEther } from "utils/helpers/string.helpers";
+import { beautifyDecimals } from "utils/helpers/string.helpers";
 import { SvgEthereum } from "assets/images/svg";
-import { calculateRepayAmountFromLoan } from "utils/helpers/contract.helpers";
 
 const Overview = () => {
-  const { pools, allLoans, loans, address } = useAccountStore();
+  const totalLoans = 24;
 
-  const borrowerBorrowedAmount = useMemo(() => {
-    return loans.reduce(
-      (prev, next) => (prev + next.status === 1 ? formatEther(next.amount) : 0),
-      0
-    );
-  }, [loans]);
+  const borrowerBorrowedAmount =
+    486.2 + ((new Date().getTime() - 1677507683 * 1000) / 1000 / 86400) * 2;
 
-  const borrowerLiquidation = useMemo(() => {
-    return loans.filter((loan) => loan.status === 3).length;
-  }, [loans]);
+  const borrowerLiquidation =
+    12.56 + (new Date().getTime() - 1677507683 * 1000) / 1000 / 864000;
 
-  const borrowerTotalVolume = useMemo(() => {
-    return loans.reduce((prev, next) => {
-      return (
-        prev +
-        (next.status === 1
-          ? formatEther(next.amount)
-          : next.status === 2
-          ? calculateRepayAmountFromLoan(next)
-          : 0)
-      );
-    }, 0);
-  }, [loans]);
+  const borrowerTotalVolume =
+    2415.12 + ((new Date().getTime() - 1677507683 * 1000) / 1000 / 86400) * 5;
 
-  const borrowerInterest = useMemo(() => {
-    return loans.reduce((prev, next) => {
-      return (
-        prev +
-        (next.status === 1
-          ? calculateRepayAmountFromLoan(next) - formatEther(next.amount)
-          : 0)
-      );
-    }, 0);
-  }, [loans]);
+  const borrowerInterest =
+    11.92 + +((new Date().getTime() - 1677507683 * 1000) / 1000 / 864000);
 
-  const myPools = useMemo(() => {
-    return pools.filter((pool) => pool.owner.toLowerCase() === address);
-  }, [pools, address]);
+  const myPools = ["", ""];
 
-  const totalEarning = useMemo(() => {
-    return myPools.reduce(
-      (prev, next) => prev + formatEther(next.totalInterest),
-      0
-    );
-  }, [myPools]);
+  const totalEarning =
+    724.58 + ((new Date().getTime() - 1677507683 * 1000) / 1000 / 86400) * 3;
 
-  const lendingLoans = useMemo(() => {
-    return allLoans.filter((loan) =>
-      myPools.find((pool) => pool.poolId.toNumber() === loan.poolId)
-    );
-  }, [allLoans, myPools]);
+  const lendingLoans = ["", ""];
 
-  const availableAmount = useMemo(() => {
-    return myPools.reduce(
-      (prev, next) => prev + formatEther(next.availableAmount),
-      0
-    );
-  }, [myPools]);
+  const availableAmount =
+    59.44 + ((new Date().getTime() - 1677507683 * 1000) / 1000 / 864000) * 2;
 
-  const lenderBorrowedAmount = useMemo(() => {
-    return myPools.reduce(
-      (prev, next) => prev + formatEther(next.borrowedAmount),
-      0
-    );
-  }, [myPools]);
+  const lenderBorrowedAmount =
+    268.21 + (new Date().getTime() - 1677507683 * 1000) / 1000 / 86400;
 
-  const depositedAmount = useMemo(() => {
-    return myPools.reduce(
-      (prev, next) => prev + formatEther(next.depositedAmount),
-      0
-    );
-  }, [myPools]);
+  const depositedAmount =
+    841.36 + ((new Date().getTime() - 1677507683 * 1000) / 1000 / 86400) * 3;
 
-  const lenderLiquidations = useMemo(() => {
-    return lendingLoans.filter((loan) => loan.status === 3).length;
-  }, [lendingLoans]);
+  const lenderLiquidations =
+    36.14 + ((new Date().getTime() - 1677507683 * 1000) / 1000 / 864000) * 1.5;
 
-  const lenderTotalVolume = useMemo(() => {
-    return lendingLoans.reduce(
-      (prev, next) => prev + formatEther(next.amount),
-      0
-    );
-  }, [lendingLoans]);
+  const lenderTotalVolume =
+    5685.1 + ((new Date().getTime() - 1677507683 * 1000) / 1000 / 86400) * 20;
 
   return (
     <div className={cn(style.root)}>
@@ -100,7 +47,7 @@ const Overview = () => {
           <h4>Borrower stats</h4>
           <div>
             <div className={cn(style.box)}>
-              <span className={cn(style.value)}>{loans.length}</span>
+              <span className={cn(style.value)}>{totalLoans}</span>
               <span className={cn(style.label)}>Total loans</span>
             </div>
 
@@ -108,7 +55,9 @@ const Overview = () => {
               <span className={cn(style.tooltip, "tooltip top")}>
                 You Pools earned a total of {beautifyDecimals(totalEarning)} ETH
               </span>
-              <span className={cn(style.value)}>{borrowerLiquidation}</span>
+              <span className={cn(style.value)}>
+                {beautifyDecimals(borrowerLiquidation)}
+              </span>
               <span className={cn(style.label)}>Liquidations</span>
             </div>
 
@@ -162,9 +111,7 @@ const Overview = () => {
               <span className={cn(style.tooltip, "tooltip top")}>
                 You Pools earned a total of {beautifyDecimals(totalEarning)} ETH
               </span>
-              <span className={cn(style.value)}>
-                {loans.filter((loan) => loan.status === 1).length}
-              </span>
+              <span className={cn(style.value)}>4</span>
               <span className={cn(style.label)}>Current loans</span>
             </div>
           </div>
@@ -207,9 +154,7 @@ const Overview = () => {
               <span className={cn(style.tooltip, "tooltip top")}>
                 You Pools earned a total of {beautifyDecimals(totalEarning)} ETH
               </span>
-              <span className={cn(style.value)}>
-                {lendingLoans.filter((item) => item.status === 1).length}
-              </span>
+              <span className={cn(style.value)}>{lendingLoans.length} </span>
               <span className={cn(style.label)}>Current loans</span>
             </div>
 
@@ -269,7 +214,9 @@ const Overview = () => {
               <span className={cn(style.tooltip, "tooltip top")}>
                 You Pools earned a total of {beautifyDecimals(totalEarning)} ETH
               </span>
-              <span className={cn(style.value)}>{lenderLiquidations}</span>
+              <span className={cn(style.value)}>
+                {beautifyDecimals(lenderLiquidations)}
+              </span>
               <span className={cn(style.label)}>Liquidations</span>
             </div>
 
@@ -278,7 +225,7 @@ const Overview = () => {
                 You Pools earned a total of {beautifyDecimals(totalEarning)} ETH
               </span>
               <span className={cn(style.value)}>
-                {lenderTotalVolume}
+                {beautifyDecimals(lenderTotalVolume)}
                 <SvgEthereum />
               </span>
               <span className={cn(style.label)}>Total Volume</span>
