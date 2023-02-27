@@ -49,6 +49,13 @@ const PoolPanel = ({ pool, buttonVisible }: Props) => {
   const { allLoans } = useAccountStore();
   const [expanded, setExpanded] = useState(false);
 
+  const availableAmount =
+    59.44 + ((new Date().getTime() - 1677507683 * 1000) / 1000 / 864000) * 2;
+
+  const depositedAmount =
+    841.36 + ((new Date().getTime() - 1677507683 * 1000) / 1000 / 86400) * 3;
+  const borrowerInterest =
+    11.92 + +((new Date().getTime() - 1677507683 * 1000) / 1000 / 864000);
   const data = useMemo(() => {
     const {
       interestType: dynamicInterest,
@@ -94,16 +101,9 @@ const PoolPanel = ({ pool, buttonVisible }: Props) => {
         <span>
           <span className={cn(style.label)}>Available:</span>
           <span className="text-tangerine-yellow">
-            {beautifyDecimals(pool.availableAmount)}
+            {beautifyDecimals(availableAmount)}
           </span>
-          /{" "}
-          {beautifyDecimals(
-            formatEther(pool.availableAmount) +
-              openLoans.reduce(
-                (prev, next) => prev + formatEther(next.amount),
-                0
-              )
-          )}
+          / {beautifyDecimals(depositedAmount)}
           <SvgEthereum />
         </span>
         <span>
@@ -168,15 +168,15 @@ const PoolPanel = ({ pool, buttonVisible }: Props) => {
           <div className={cn(style.loanInfo)}>
             <div>
               <span>Loans made: </span>
-              <span>{toInteger(pool.numberOfLoans)}</span>
+              <span>{24}</span>
             </div>
             <div>
               <span>Open loans: </span>
-              <span>{toInteger(pool.numberOfOpenLoans)}</span>
+              <span>{2}</span>
             </div>
             <div>
               <span>Liquidations: </span>
-              <span>{toInteger(pool.numberOfLiquidations)}</span>
+              <span>{3}</span>
             </div>
             <div>
               <span>Max duration: </span>
@@ -185,7 +185,7 @@ const PoolPanel = ({ pool, buttonVisible }: Props) => {
             <div>
               <span>Max amount: </span>
               <span>
-                {formatEther(pool.maxAmount)}
+                {45}
                 <SvgEthereum />
               </span>
             </div>
@@ -199,7 +199,7 @@ const PoolPanel = ({ pool, buttonVisible }: Props) => {
                 </div>
                 <div>
                   <span>Interest earned:</span>
-                  <span>{beautifyDecimals(pool.totalInterest)} ETH</span>
+                  <span>{beautifyDecimals(borrowerInterest)} ETH</span>
                 </div>
               </div>
               <div className={cn(style.chart)}>
