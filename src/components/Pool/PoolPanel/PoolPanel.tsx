@@ -7,9 +7,7 @@ import { IPikachu } from "utils/typechain-types/contracts/Master.sol/Pikachu";
 import {
   beautifyAddress,
   beautifyDecimals,
-  formatEther,
   toFloat,
-  toInteger,
 } from "utils/helpers/string.helpers";
 import {
   SvgArrowDown,
@@ -36,7 +34,7 @@ import {
   YAxis,
 } from "recharts";
 
-import { useAccountStore } from "store";
+// import { useAccountStore } from "store";
 import { identicon } from "minidenticons";
 
 interface Props {
@@ -46,7 +44,7 @@ interface Props {
 }
 
 const PoolPanel = ({ pool, buttonVisible }: Props) => {
-  const { allLoans } = useAccountStore();
+  // const { allLoans } = useAccountStore();
   const [expanded, setExpanded] = useState(false);
 
   const availableAmount =
@@ -78,12 +76,6 @@ const PoolPanel = ({ pool, buttonVisible }: Props) => {
       interest: (interests[index] - 1) * 100,
     }));
   }, [pool]);
-
-  const openLoans = useMemo(() => {
-    return allLoans.filter(
-      (item) => item.poolId === toInteger(pool.poolId) && item.status === 1
-    );
-  }, [allLoans, pool]);
 
   return (
     <div className={cn(style.root)}>
