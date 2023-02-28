@@ -3,16 +3,18 @@ import { useState } from "react";
 import style from "./Home.module.css";
 import cn from "classnames";
 import {
-  SvgArrowUp,
-  SvgEthereum,
   SvgArrowRight,
   SvgArrowLeft,
+  SvgWorld,
+  SvgPercent,
+  SvgClock,
+  SvgLightning,
 } from "assets/images/svg";
 import { useKeenSlider } from "keen-slider/react";
 import "keen-slider/keen-slider.min.css";
 import LinkWithSearchParams from "components/LinkWithSearchParams";
 
-import Land from "assets/images/png/land.png";
+import Land from "assets/images/png/land.webp";
 import slide1 from "assets/images/png/slide1.png";
 import slide2 from "assets/images/png/slide2.png";
 import slide3 from "assets/images/png/slide3.png";
@@ -20,10 +22,6 @@ import slide4 from "assets/images/png/slide4.png";
 import slide5 from "assets/images/png/slide5.png";
 import slide6 from "assets/images/png/slide6.png";
 import slide7 from "assets/images/png/slide7.png";
-
-import collectionWebp from "assets/images/webp/4841863.webp";
-import liquidityWebp from "assets/images/webp/4121252.webp";
-import loanWebp from "assets/images/webp/4112596.webp";
 
 const Home = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -45,6 +43,50 @@ const Home = () => {
     },
   });
 
+  const figures = [
+    {
+      label: "Liquidity Sources",
+      value: "345",
+    },
+    {
+      label: "Total Volume",
+      value: "$281B+",
+    },
+    {
+      label: "Total Wallets",
+      value: "4.4M+",
+    },
+    {
+      label: "Total Trades",
+      value: "28.7M+",
+    },
+  ];
+
+  const states = [
+    {
+      icon: <SvgWorld />,
+      label: "Deposit & Borrow TVL",
+      value: "12,956.85 ETH",
+      comment: "($21,155,944.68)",
+    },
+    {
+      icon: <SvgPercent />,
+      label: "ETH Deposit APR",
+      value: "8.25%",
+    },
+    {
+      icon: <SvgClock />,
+      label: "Loans Value All Time",
+      value: "25,056.29 ETH",
+      comment: "($40,911,910.31)",
+    },
+    {
+      icon: <SvgLightning />,
+      label: "Open Loans",
+      value: "1,250",
+    },
+  ];
+
   return (
     <section className={cn(style.root)}>
       <div className={cn(style.land)}>
@@ -60,65 +102,46 @@ const Home = () => {
           </div>
           <div className={cn(style.buttonBar)}>
             <LinkWithSearchParams to={{ pathname: "/borrow" }}>
-              <Button variant="yellow" sx="w-32 h-12">
-                Borrow
+              <Button
+                variant="blue"
+                sx="w-40 h-12 text-[#353D9B] bg-[#D7DDFB] "
+              >
+                Apply Now
               </Button>
             </LinkWithSearchParams>
-            <LinkWithSearchParams to={{ pathname: "/lend" }}>
-              <Button variant="yellow" sx="w-32 h-12">
-                Lend
-              </Button>
-            </LinkWithSearchParams>
-            <button>Docs</button>
           </div>
         </div>
         <img src={Land} alt="land" />
       </div>
 
-      <div className={cn(style.state)}>
-        <div>
-          <div>Verified Collections</div>
-          <div>
-            <div className={cn(style.value)}>30</div>
-            <SvgArrowUp className="h-8 w-8" />
+      <div className={cn(style.figures)}>
+        {figures.map((figure, index) => (
+          <div key={index}>
+            <span>{figure.value}</span>
+            <label>{figure.label}</label>
           </div>
-          <img
-            src={collectionWebp}
-            className={cn(style.img)}
-            alt="verified collections"
-          />
-        </div>
-        <div>
-          <div>Current Open Loans</div>
-          <div>
-            <div className={cn(style.value)}>1,280</div>
-            <SvgArrowUp className="h-8 w-8" />
-          </div>
-          <img
-            src={loanWebp}
-            className={cn(style.img)}
-            alt="Current Open Loans"
-          />
-        </div>
-        <div>
-          <div>Total Liquidity on PIKACHU</div>
-          <div>
+        ))}
+      </div>
+
+      <div className={cn(style.states)}>
+        {states.map((state, index) => (
+          <div key={index} className={cn(style.state)}>
+            {state.icon}
+
             <div className={cn(style.value)}>
-              3,527
-              <SvgEthereum className="w-6 h-6" />
+              <span className={cn(style.label)}>{state.label}</span>
+
+              <div>
+                {state.value}
+                <span>{state.comment}</span>
+              </div>
             </div>
-            <SvgArrowUp className="h-8 w-8" />
           </div>
-          <img
-            src={liquidityWebp}
-            className={cn(style.img)}
-            alt="Total Liquidity on PIKACHU"
-          />
-        </div>
+        ))}
       </div>
 
       <div className={cn(style.carousel)}>
-        <div className={cn(style.title)}>Popular Collections</div>
+        <div className={cn(style.title)}>Top Collections</div>
         <div className="relative px-16">
           <div ref={sliderRef} className="keen-slider">
             <div className="keen-slider__slide">

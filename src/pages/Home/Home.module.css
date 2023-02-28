@@ -4,55 +4,64 @@
     & > div {
       @apply flex flex-col justify-between pt-16 w-[545px];
       .title {
-        @apply text-[40px] font-bold;
+        @apply text-[40px] font-bold text-[#7781C9];
       }
       .subTitle {
-        @apply text-6xl font-bold text-tangerine-yellow leading-tight;
+        @apply text-6xl font-bold text-[#3E4598] leading-tight;
       }
       .content {
-        @apply text-white/50;
+        @apply text-[#3E4598CC];
       }
       .buttonBar {
         @apply flex gap-6 font-bold;
       }
     }
   }
-  .state {
-    @apply flex pt-36 pb-48 justify-center gap-8 font-bold;
+
+  .figures {
+    @apply flex items-center gap-x-20 justify-center my-24;
+
     & > div {
-      position: relative;
-      background: rgb(105, 81, 29);
-      @apply flex flex-col w-96 p-7 h-44 gap-4
-        overflow-hidden rounded-[10px] cursor-pointer;
-      & > div {
-        @apply flex gap-4 items-center z-[1];
-        .value {
-          @apply flex text-[30px]  items-center;
-          svg {
-            @apply ml-2;
+      @apply flex flex-col items-center;
+
+      & > span {
+        @apply text-[2.5rem] font-bold;
+      }
+      & > label {
+        @apply text-lg;
+      }
+    }
+  }
+  .states {
+    @apply grid grid-cols-2 bg-[#D7DDFB] rounded-[20px] px-28 pt-12 pb-16 gap-y-14 relative z-0 overflow-hidden mb-16;
+
+    &:after {
+      content: "Real-time Stats";
+      @apply absolute text-[100px] text-white/50 right-0 -bottom-12 z-[-1];
+    }
+
+    & > .state {
+      @apply flex items-center gap-x-8;
+
+      .value {
+        @apply flex flex-col gap-y-2.5;
+
+        .label {
+          color: #353d9b;
+          opacity: 0.6;
+          font-weight: 500;
+        }
+
+        div {
+          @apply flex gap-x-5 font-bold text-2xl;
+
+          span {
+            font-size: 1rem;
+            color: #353d9b;
+            opacity: 0.6;
+            font-weight: 500;
           }
         }
-      }
-
-      &::after {
-        content: "";
-        position: absolute;
-        width: 100%;
-        height: 100%;
-        left: 0;
-        top: 0;
-        @apply bg-black/80 duration-100;
-      }
-
-      &:hover {
-        filter: drop-shadow(8px 8px 4px rgba(0, 0, 0, 0.25));
-        &::after {
-          @apply bg-transparent;
-        }
-      }
-
-      .img {
-        @apply absolute h-full top-0 right-4;
       }
     }
   }
@@ -62,7 +71,7 @@
     background-size: 100%;
     @apply -mx-[7.5rem];
     .title {
-      @apply text-center text-4xl py-10 font-bold;
+      @apply text-center text-4xl py-10 font-bold text-[#353D9B];
     }
     .arrow {
       @apply bg-white/50 w-8 h-8 flex justify-center items-center rounded-full absolute top-1/2 -translate-y-[48px] cursor-pointer;
@@ -83,7 +92,7 @@
       }
     }
     .active {
-      @apply bg-tangerine-yellow;
+      @apply bg-[#353D9B];
     }
   }
 }

@@ -33,3 +33,7 @@ export { ReactComponent as SvgUSDT } from "./tetherusd.svg";
 export { ReactComponent as SvgDisconnect } from "./disconnect.svg";
 export { ReactComponent as SvgSetting } from "./setting.svg";
 export { ReactComponent as SvgDots } from "./dots.svg";
+export { ReactComponent as SvgWorld } from "./world.svg";
+export { ReactComponent as SvgClock } from "./clock.svg";
+export { ReactComponent as SvgLightning } from "./lightning.svg";
+export { ReactComponent as SvgPercent } from "./percent.svg";

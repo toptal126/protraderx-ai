@@ -26,7 +26,7 @@ import {
   usePools,
 } from "utils/hooks/pikachu/usePools";
 import Collections from "pages/Collections";
-import Borrow from "pages/Borrow";
+// import Borrow from "pages/Borrow";
 import { useHoldingNfts } from "utils/hooks/useHoldingNfts";
 import Navbar from "components/Navbar";
 
@@ -91,8 +91,8 @@ function App() {
       <Header />
       <main>
         <Routes>
-          <Route path="/" element={<Borrow />} />
-          <Route path="/home" element={<Home />} />
+          <Route path="/" element={<Home />} />
+          {/* <Route path="/home" element={<Home />} /> */}
           <Route path="/setting/*" element={<Setting />} />
           <Route path="/pools" element={<Pools />} />
           <Route path="/lend" element={<Lend />} />

@@ -11,6 +11,7 @@ html {
 body {
   font-family: "Chakra Petch", sans-serif;
   color: #342fff;
+  @apply bg-[#F2F2FC];
 }
 
 ::-webkit-scrollbar {
