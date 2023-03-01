@@ -53,7 +53,7 @@ body {
     @screen md {
       min-height: calc(100vh - 157px);
     }
-    @apply py-2 px-2;
+    @apply py-4 px-4;
 
     @screen sm {
       @apply px-[2rem];
