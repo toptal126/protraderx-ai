@@ -1,5 +1,5 @@
 import { useMemo, useState } from "react";
-import style from "./Assets.module.css";
+import style from "./Mortgage.module.css";
 import cn from "classnames";
 import { NFTItem, useAccountStore, useSettingStore } from "store";
 import { Button, Input } from "components/ui";
@@ -11,7 +11,7 @@ import { useMarketplaceContract } from "utils/hooks/useContract";
 import { beautifyDecimals } from "utils/helpers/string.helpers";
 import { updateListingItem } from "utils/apis/pikachu.api";
 
-const Assets = () => {
+const Mortgage = () => {
   const [listingModalVisible, setListingModalVisible] = useState(false);
 
   const {
@@ -115,4 +115,4 @@ const Assets = () => {
   );
 };
 
-export default Assets;
+export default Mortgage;

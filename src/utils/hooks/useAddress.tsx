@@ -1,5 +1,6 @@
 import {
   ADMIN_ADDRESSES,
+  MARKETPLACE_ADDRESSES,
   NFT_1_ADDRESSES,
   NFT_2_ADDRESSES,
   PIKACHU_ADDRESSES,
@@ -14,6 +15,11 @@ export const useAdminAddress = () => {
 export const usePikachuAddress = () => {
   const chainId = useChainId();
   return PIKACHU_ADDRESSES[chainId];
+};
+
+export const useMarketplaceAddress = () => {
+  const chainId = useChainId();
+  return MARKETPLACE_ADDRESSES[chainId];
 };
 
 export const useNFT1Address = () => {

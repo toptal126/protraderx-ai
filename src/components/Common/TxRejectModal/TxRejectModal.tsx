@@ -26,7 +26,7 @@ const TxRejectModal = () => {
         </div>
         <div className={cn(style.footer)}>
           <Button variant="gray" onClick={() => setTxRejectModalVisible(false)}>
-            Dismiss
+            Close
           </Button>
         </div>
       </div>

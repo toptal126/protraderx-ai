@@ -12,7 +12,7 @@
   }
 
   .body {
-    @apply my-4 px-6 flex flex-col items-center;
+    @apply my-4 px-6 flex flex-col items-center text-plochere font-bold;
 
     svg {
       @apply mb-6;
@@ -27,7 +27,7 @@
     @apply flex m-6;
 
     button {
-      @apply h-10 w-full;
+      @apply h-10 w-full bg-plochere text-white font-bold;
     }
   }
 }

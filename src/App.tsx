@@ -29,6 +29,7 @@ import Collections from "pages/Collections";
 // import Borrow from "pages/Borrow";
 import { useHoldingNfts } from "utils/hooks/useHoldingNfts";
 import Navbar from "components/Navbar";
+import Mortgage from "pages/Mortgage/Mortgage";
 
 function App() {
   const account = useAccount();
@@ -101,6 +102,7 @@ function App() {
           <Route path="/demo" element={<Demo />} />
           <Route path="/dashboard/*" element={<Dashboard />} />
           <Route path="/pool/:owner/:poolId" element={<Pool />} />
+          <Route path="/mortgage/*" element={<Mortgage />} />
           {/* <Route path="/pool/:owner/:poolId/borrow" element={<Borrow />} /> */}
         </Routes>
       </main>
