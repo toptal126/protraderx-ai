@@ -31,6 +31,7 @@ import type {
 export declare namespace IPikachu {
   export type AdminSettingStruct = {
     verifiedCollections: PromiseOrValue<string>[];
+    stableCoins: PromiseOrValue<string>[];
     feeTo: PromiseOrValue<string>;
     minDepositAmount: PromiseOrValue<BigNumberish>;
     platformFee: PromiseOrValue<BigNumberish>;
@@ -39,12 +40,14 @@ export declare namespace IPikachu {
 
   export type AdminSettingStructOutput = [
     string[],
+    string[],
     string,
     BigNumber,
     number,
     number
   ] & {
     verifiedCollections: string[];
+    stableCoins: string[];
     feeTo: string;
     minDepositAmount: BigNumber;
     platformFee: number;
@@ -78,6 +81,7 @@ export declare namespace IPikachu {
     numberOfLoans: PromiseOrValue<BigNumberish>;
     numberOfOpenLoans: PromiseOrValue<BigNumberish>;
     numberOfLiquidations: PromiseOrValue<BigNumberish>;
+    poolType: PromiseOrValue<BigNumberish>;
   };
 
   export type PoolStructOutput = [
@@ -106,7 +110,8 @@ export declare namespace IPikachu {
     string[],
     BigNumber,
     BigNumber,
-    BigNumber
+    BigNumber,
+    number
   ] & {
     poolId: BigNumber;
     owner: string;
@@ -134,6 +139,7 @@ export declare namespace IPikachu {
     numberOfLoans: BigNumber;
     numberOfOpenLoans: BigNumber;
     numberOfLiquidations: BigNumber;
+    poolType: number;
   };
 }
 
@@ -142,27 +148,31 @@ export interface PikachuInterface extends utils.Interface {
     "adminSetting()": FunctionFragment;
     "borrow(uint256,address,uint256,uint256,uint256,bytes,uint256,uint256)": FunctionFragment;
     "calculateRepayAmount(uint256,uint8,uint256,uint256,uint256)": FunctionFragment;
-    "createPool(uint256,uint256,uint8,uint256,uint256,uint256,bool,address[])": FunctionFragment;
+    "createPool(uint256,uint256,uint8,uint256,uint256,uint256,bool,address[],uint8)": FunctionFragment;
     "depositToPool(uint256)": FunctionFragment;
+    "getAdminSetting()": FunctionFragment;
     "getEthSignedMessageHash(bytes32)": FunctionFragment;
     "getMessageHash(address,uint256,uint256)": FunctionFragment;
     "getNumberByPoolsByOwner(address)": FunctionFragment;
     "getPoolById(uint256)": FunctionFragment;
     "getPoolsByOwner(address)": FunctionFragment;
     "isListedCollection(address[])": FunctionFragment;
+    "isListedStableCoin(address)": FunctionFragment;
     "liquidate(uint256,address)": FunctionFragment;
     "loans(uint256,address)": FunctionFragment;
     "onERC721Received(address,address,uint256,bytes)": FunctionFragment;
     "owner()": FunctionFragment;
+    "purchaseViaMortgage(uint256,address,uint256,uint256)": FunctionFragment;
     "recoverSigner(bytes32,bytes)": FunctionFragment;
     "renounceOwnership()": FunctionFragment;
     "repay(uint256)": FunctionFragment;
+    "setMarketplace(address)": FunctionFragment;
     "setPaused(uint256,bool)": FunctionFragment;
     "splitSignature(bytes)": FunctionFragment;
     "sqrt(uint256)": FunctionFragment;
     "totalPools()": FunctionFragment;
     "transferOwnership(address)": FunctionFragment;
-    "updateAdminSetting((address[],address,uint256,uint32,uint32))": FunctionFragment;
+    "updateAdminSetting((address[],address[],address,uint256,uint32,uint32))": FunctionFragment;
     "updatePool(uint256,uint256,uint256,uint8,uint256,uint256,uint256,bool,address[])": FunctionFragment;
     "verifiedCollections()": FunctionFragment;
     "verify(address,address,uint256,uint256,bytes)": FunctionFragment;
@@ -177,19 +187,23 @@ export interface PikachuInterface extends utils.Interface {
       | "calculateRepayAmount"
       | "createPool"
       | "depositToPool"
+      | "getAdminSetting"
       | "getEthSignedMessageHash"
       | "getMessageHash"
       | "getNumberByPoolsByOwner"
       | "getPoolById"
       | "getPoolsByOwner"
       | "isListedCollection"
+      | "isListedStableCoin"
       | "liquidate"
       | "loans"
       | "onERC721Received"
       | "owner"
+      | "purchaseViaMortgage"
       | "recoverSigner"
       | "renounceOwnership"
       | "repay"
+      | "setMarketplace"
       | "setPaused"
       | "splitSignature"
       | "sqrt"
@@ -240,12 +254,17 @@ export interface PikachuInterface extends utils.Interface {
       PromiseOrValue<BigNumberish>,
       PromiseOrValue<BigNumberish>,
       PromiseOrValue<boolean>,
-      PromiseOrValue<string>[]
+      PromiseOrValue<string>[],
+      PromiseOrValue<BigNumberish>
     ]
   ): string;
   encodeFunctionData(
     functionFragment: "depositToPool",
     values: [PromiseOrValue<BigNumberish>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "getAdminSetting",
+    values?: undefined
   ): string;
   encodeFunctionData(
     functionFragment: "getEthSignedMessageHash",
@@ -276,6 +295,10 @@ export interface PikachuInterface extends utils.Interface {
     values: [PromiseOrValue<string>[]]
   ): string;
   encodeFunctionData(
+    functionFragment: "isListedStableCoin",
+    values: [PromiseOrValue<string>]
+  ): string;
+  encodeFunctionData(
     functionFragment: "liquidate",
     values: [PromiseOrValue<BigNumberish>, PromiseOrValue<string>]
   ): string;
@@ -294,6 +317,15 @@ export interface PikachuInterface extends utils.Interface {
   ): string;
   encodeFunctionData(functionFragment: "owner", values?: undefined): string;
   encodeFunctionData(
+    functionFragment: "purchaseViaMortgage",
+    values: [
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<string>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>
+    ]
+  ): string;
+  encodeFunctionData(
     functionFragment: "recoverSigner",
     values: [PromiseOrValue<BytesLike>, PromiseOrValue<BytesLike>]
   ): string;
@@ -304,6 +336,10 @@ export interface PikachuInterface extends utils.Interface {
   encodeFunctionData(
     functionFragment: "repay",
     values: [PromiseOrValue<BigNumberish>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "setMarketplace",
+    values: [PromiseOrValue<string>]
   ): string;
   encodeFunctionData(
     functionFragment: "setPaused",
@@ -381,6 +417,10 @@ export interface PikachuInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
+    functionFragment: "getAdminSetting",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
     functionFragment: "getEthSignedMessageHash",
     data: BytesLike
   ): Result;
@@ -404,6 +444,10 @@ export interface PikachuInterface extends utils.Interface {
     functionFragment: "isListedCollection",
     data: BytesLike
   ): Result;
+  decodeFunctionResult(
+    functionFragment: "isListedStableCoin",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(functionFragment: "liquidate", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "loans", data: BytesLike): Result;
   decodeFunctionResult(
@@ -411,6 +455,10 @@ export interface PikachuInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "owner", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "purchaseViaMortgage",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(
     functionFragment: "recoverSigner",
     data: BytesLike
@@ -420,6 +468,10 @@ export interface PikachuInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "repay", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "setMarketplace",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(functionFragment: "setPaused", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "splitSignature",
@@ -621,6 +673,7 @@ export interface Pikachu extends BaseContract {
       _maxDuration: PromiseOrValue<BigNumberish>,
       _compound: PromiseOrValue<boolean>,
       _collections: PromiseOrValue<string>[],
+      _poolType: PromiseOrValue<BigNumberish>,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
@@ -628,6 +681,10 @@ export interface Pikachu extends BaseContract {
       _poolId: PromiseOrValue<BigNumberish>,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
+
+    getAdminSetting(
+      overrides?: CallOverrides
+    ): Promise<[IPikachu.AdminSettingStructOutput]>;
 
     getEthSignedMessageHash(
       _messageHash: PromiseOrValue<BytesLike>,
@@ -661,6 +718,11 @@ export interface Pikachu extends BaseContract {
       overrides?: CallOverrides
     ): Promise<[boolean] & { isListed: boolean }>;
 
+    isListedStableCoin(
+      _erc20: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<[boolean] & { isListed: boolean }>;
+
     liquidate(
       _poolId: PromiseOrValue<BigNumberish>,
       _loan: PromiseOrValue<string>,
@@ -683,7 +745,8 @@ export interface Pikachu extends BaseContract {
         BigNumber,
         number,
         BigNumber,
-        BigNumber
+        BigNumber,
+        number
       ] & {
         borrower: string;
         amount: BigNumber;
@@ -696,6 +759,7 @@ export interface Pikachu extends BaseContract {
         interestType: number;
         interestStartRate: BigNumber;
         interestCapRate: BigNumber;
+        poolType: number;
       }
     >;
 
@@ -708,6 +772,14 @@ export interface Pikachu extends BaseContract {
     ): Promise<[string]>;
 
     owner(overrides?: CallOverrides): Promise<[string]>;
+
+    purchaseViaMortgage(
+      _poolId: PromiseOrValue<BigNumberish>,
+      _collection: PromiseOrValue<string>,
+      _tokenId: PromiseOrValue<BigNumberish>,
+      _duration: PromiseOrValue<BigNumberish>,
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
 
     recoverSigner(
       _ethSignedMessageHash: PromiseOrValue<BytesLike>,
@@ -722,6 +794,11 @@ export interface Pikachu extends BaseContract {
     repay(
       _poolId: PromiseOrValue<BigNumberish>,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    setMarketplace(
+      _marketplace: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     setPaused(
@@ -828,6 +905,7 @@ export interface Pikachu extends BaseContract {
     _maxDuration: PromiseOrValue<BigNumberish>,
     _compound: PromiseOrValue<boolean>,
     _collections: PromiseOrValue<string>[],
+    _poolType: PromiseOrValue<BigNumberish>,
     overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
@@ -835,6 +913,10 @@ export interface Pikachu extends BaseContract {
     _poolId: PromiseOrValue<BigNumberish>,
     overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
+
+  getAdminSetting(
+    overrides?: CallOverrides
+  ): Promise<IPikachu.AdminSettingStructOutput>;
 
   getEthSignedMessageHash(
     _messageHash: PromiseOrValue<BytesLike>,
@@ -868,6 +950,11 @@ export interface Pikachu extends BaseContract {
     overrides?: CallOverrides
   ): Promise<boolean>;
 
+  isListedStableCoin(
+    _erc20: PromiseOrValue<string>,
+    overrides?: CallOverrides
+  ): Promise<boolean>;
+
   liquidate(
     _poolId: PromiseOrValue<BigNumberish>,
     _loan: PromiseOrValue<string>,
@@ -890,7 +977,8 @@ export interface Pikachu extends BaseContract {
       BigNumber,
       number,
       BigNumber,
-      BigNumber
+      BigNumber,
+      number
     ] & {
       borrower: string;
       amount: BigNumber;
@@ -903,6 +991,7 @@ export interface Pikachu extends BaseContract {
       interestType: number;
       interestStartRate: BigNumber;
       interestCapRate: BigNumber;
+      poolType: number;
     }
   >;
 
@@ -915,6 +1004,14 @@ export interface Pikachu extends BaseContract {
   ): Promise<string>;
 
   owner(overrides?: CallOverrides): Promise<string>;
+
+  purchaseViaMortgage(
+    _poolId: PromiseOrValue<BigNumberish>,
+    _collection: PromiseOrValue<string>,
+    _tokenId: PromiseOrValue<BigNumberish>,
+    _duration: PromiseOrValue<BigNumberish>,
+    overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
 
   recoverSigner(
     _ethSignedMessageHash: PromiseOrValue<BytesLike>,
@@ -929,6 +1026,11 @@ export interface Pikachu extends BaseContract {
   repay(
     _poolId: PromiseOrValue<BigNumberish>,
     overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  setMarketplace(
+    _marketplace: PromiseOrValue<string>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   setPaused(
@@ -1035,6 +1137,7 @@ export interface Pikachu extends BaseContract {
       _maxDuration: PromiseOrValue<BigNumberish>,
       _compound: PromiseOrValue<boolean>,
       _collections: PromiseOrValue<string>[],
+      _poolType: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<void>;
 
@@ -1042,6 +1145,10 @@ export interface Pikachu extends BaseContract {
       _poolId: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<void>;
+
+    getAdminSetting(
+      overrides?: CallOverrides
+    ): Promise<IPikachu.AdminSettingStructOutput>;
 
     getEthSignedMessageHash(
       _messageHash: PromiseOrValue<BytesLike>,
@@ -1075,6 +1182,11 @@ export interface Pikachu extends BaseContract {
       overrides?: CallOverrides
     ): Promise<boolean>;
 
+    isListedStableCoin(
+      _erc20: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<boolean>;
+
     liquidate(
       _poolId: PromiseOrValue<BigNumberish>,
       _loan: PromiseOrValue<string>,
@@ -1097,7 +1209,8 @@ export interface Pikachu extends BaseContract {
         BigNumber,
         number,
         BigNumber,
-        BigNumber
+        BigNumber,
+        number
       ] & {
         borrower: string;
         amount: BigNumber;
@@ -1110,6 +1223,7 @@ export interface Pikachu extends BaseContract {
         interestType: number;
         interestStartRate: BigNumber;
         interestCapRate: BigNumber;
+        poolType: number;
       }
     >;
 
@@ -1123,6 +1237,14 @@ export interface Pikachu extends BaseContract {
 
     owner(overrides?: CallOverrides): Promise<string>;
 
+    purchaseViaMortgage(
+      _poolId: PromiseOrValue<BigNumberish>,
+      _collection: PromiseOrValue<string>,
+      _tokenId: PromiseOrValue<BigNumberish>,
+      _duration: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
     recoverSigner(
       _ethSignedMessageHash: PromiseOrValue<BytesLike>,
       _signature: PromiseOrValue<BytesLike>,
@@ -1133,6 +1255,11 @@ export interface Pikachu extends BaseContract {
 
     repay(
       _poolId: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    setMarketplace(
+      _marketplace: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<void>;
 
@@ -1304,6 +1431,7 @@ export interface Pikachu extends BaseContract {
       _maxDuration: PromiseOrValue<BigNumberish>,
       _compound: PromiseOrValue<boolean>,
       _collections: PromiseOrValue<string>[],
+      _poolType: PromiseOrValue<BigNumberish>,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
@@ -1311,6 +1439,8 @@ export interface Pikachu extends BaseContract {
       _poolId: PromiseOrValue<BigNumberish>,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
+
+    getAdminSetting(overrides?: CallOverrides): Promise<BigNumber>;
 
     getEthSignedMessageHash(
       _messageHash: PromiseOrValue<BytesLike>,
@@ -1344,6 +1474,11 @@ export interface Pikachu extends BaseContract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
+    isListedStableCoin(
+      _erc20: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
     liquidate(
       _poolId: PromiseOrValue<BigNumberish>,
       _loan: PromiseOrValue<string>,
@@ -1366,6 +1501,14 @@ export interface Pikachu extends BaseContract {
 
     owner(overrides?: CallOverrides): Promise<BigNumber>;
 
+    purchaseViaMortgage(
+      _poolId: PromiseOrValue<BigNumberish>,
+      _collection: PromiseOrValue<string>,
+      _tokenId: PromiseOrValue<BigNumberish>,
+      _duration: PromiseOrValue<BigNumberish>,
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
     recoverSigner(
       _ethSignedMessageHash: PromiseOrValue<BytesLike>,
       _signature: PromiseOrValue<BytesLike>,
@@ -1379,6 +1522,11 @@ export interface Pikachu extends BaseContract {
     repay(
       _poolId: PromiseOrValue<BigNumberish>,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    setMarketplace(
+      _marketplace: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     setPaused(
@@ -1477,6 +1625,7 @@ export interface Pikachu extends BaseContract {
       _maxDuration: PromiseOrValue<BigNumberish>,
       _compound: PromiseOrValue<boolean>,
       _collections: PromiseOrValue<string>[],
+      _poolType: PromiseOrValue<BigNumberish>,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
@@ -1484,6 +1633,8 @@ export interface Pikachu extends BaseContract {
       _poolId: PromiseOrValue<BigNumberish>,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
+
+    getAdminSetting(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     getEthSignedMessageHash(
       _messageHash: PromiseOrValue<BytesLike>,
@@ -1517,6 +1668,11 @@ export interface Pikachu extends BaseContract {
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
+    isListedStableCoin(
+      _erc20: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
     liquidate(
       _poolId: PromiseOrValue<BigNumberish>,
       _loan: PromiseOrValue<string>,
@@ -1539,6 +1695,14 @@ export interface Pikachu extends BaseContract {
 
     owner(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
+    purchaseViaMortgage(
+      _poolId: PromiseOrValue<BigNumberish>,
+      _collection: PromiseOrValue<string>,
+      _tokenId: PromiseOrValue<BigNumberish>,
+      _duration: PromiseOrValue<BigNumberish>,
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
     recoverSigner(
       _ethSignedMessageHash: PromiseOrValue<BytesLike>,
       _signature: PromiseOrValue<BytesLike>,
@@ -1552,6 +1716,11 @@ export interface Pikachu extends BaseContract {
     repay(
       _poolId: PromiseOrValue<BigNumberish>,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    setMarketplace(
+      _marketplace: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     setPaused(

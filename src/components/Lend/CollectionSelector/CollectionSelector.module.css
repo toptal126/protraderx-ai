@@ -1,9 +1,9 @@
 .root {
-  @apply flex flex-col bg-raisin-black w-fit relative z-[5];
+  @apply flex flex-col w-fit relative z-[5];
   align-items: flex-start !important;
 
   .selection {
-    @apply flex items-center justify-between pl-6 pr-5 h-20 rounded-lg border border-tangerine-yellow bg-pineapple z-10 cursor-pointer;
+    @apply flex items-center justify-between pl-6 pr-5 h-20 border border-pro-blue bg-raisin-black z-10 cursor-pointer;
 
     @screen md {
       @apply w-[460px];
@@ -19,12 +19,10 @@
   }
 
   .collections {
-    @apply w-full flex flex-col rounded-b-lg absolute bg-raisin-black z-0 animate-enter;
-    top: calc(100% - 8px);
-
+    @apply w-full flex flex-col absolute bg-raisin-black z-0 animate-enter border-pro-blue border;
+    top: calc(100% - 33px);
     .searchBox {
-      @apply flex flex-col mt-8 px-5 pt-2 pb-3.5;
-      background: rgba(255, 255, 255, 0.15);
+      @apply flex flex-col mt-8 px-5 pt-2 pb-3.5 bg-smoky-black;
 
       .count {
         @apply flex items-center;
@@ -39,7 +37,6 @@
     }
 
     .list {
-      @apply pb-4;
       .row {
         @apply p-2 md:px-5 md:pt-4 flex flex-wrap items-center cursor-pointer hover:bg-white/5 duration-75;
 

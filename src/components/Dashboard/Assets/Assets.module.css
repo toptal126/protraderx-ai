@@ -18,9 +18,9 @@
       .actions {
         @apply ml-auto mr-4 mb-3;
 
-        button {
-          @apply w-8 h-8 bg-transparent hover:bg-white/10;
-        }
+        /* button {
+          @apply bg-black/10 hover:bg-black/20;
+        } */
       }
     }
   }

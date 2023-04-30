@@ -105,7 +105,6 @@ function App() {
         </Routes>
       </main>
       <Footer />
-
       <Navbar />
     </div>
   );

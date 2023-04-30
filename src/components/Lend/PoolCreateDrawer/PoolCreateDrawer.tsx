@@ -45,6 +45,7 @@ const PoolCreateDrawer = ({ setVisible }: IProps) => {
   const [maxAmount, setMaxAmount] = useState("0");
 
   const [dynamicInterest, setDynamicInterest] = useState<boolean>(false);
+  const [isForLending, setIsForLending] = useState<boolean>(false);
   const [interestStarting, setInterestStarting] = useState("0");
   const [interestCap, setInterestCap] = useState("0");
   const [supportedCollections, setSupportedCollections] = useState<string[]>(
@@ -90,6 +91,7 @@ const PoolCreateDrawer = ({ setVisible }: IProps) => {
           toInteger(maxDuration) * SECONDS_PER_DAY,
           compoundInterest,
           supportedCollections,
+          isForLending ? 1 : 0,
           { value: ethers.utils.parseEther(depositAmount) }
         ),
         async () => {
@@ -110,6 +112,15 @@ const PoolCreateDrawer = ({ setVisible }: IProps) => {
       <div className={cn(style.controls)}>
         <div>
           <span className={cn(style.label)}>Basic settings</span>
+
+          <div className={cn(style.form, "tooltip-container")}>
+            <span className={cn(style.tooltip, "tooltip top")}>
+              Choose Pool Type
+            </span>
+            Lending Pool
+            <Switch toggled={isForLending} setToggled={setIsForLending} />
+            Mortgage Pool
+          </div>
 
           <CollectionSelector
             options={supportedCollections}

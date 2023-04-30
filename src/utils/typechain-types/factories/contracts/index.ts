@@ -5,4 +5,5 @@ export * as masterSol from "./Master.sol";
 export * as interfaces from "./interfaces";
 export * as test from "./test";
 export { Lock__factory } from "./Lock__factory";
+export { Marketplace__factory } from "./Marketplace__factory";
 export { VerifySignature__factory } from "./VerifySignature__factory";

@@ -81,6 +81,7 @@ export const useSettingStore = create<ISettingState>((set, get) => ({
     minDepositAmount: 0,
     platformFee: 0,
     verifiedCollections: [],
+    stableCoins: [],
   },
   collections: [],
 

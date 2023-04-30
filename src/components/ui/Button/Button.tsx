@@ -2,7 +2,7 @@ import cn from "classnames";
 import s from "./Button.module.css";
 
 type ButtonVariant = "yellow" | "gray" | "blue";
-interface MyButtonProps {
+interface MyButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: ButtonVariant;
   sx?: string;
 }
@@ -15,13 +15,7 @@ const extractGradientFromVariant = (variant: ButtonVariant) => {
   }[variant];
 };
 
-const Button: React.FC<
-  MyButtonProps &
-    React.DetailedHTMLProps<
-      React.ButtonHTMLAttributes<HTMLButtonElement>,
-      HTMLButtonElement
-    >
-> = (props) => {
+const Button = (props: MyButtonProps) => {
   return (
     <button
       className={cn(

@@ -26,6 +26,8 @@ export type { IPikachu } from "./contracts/interfaces/IPikachu";
 export { IPikachu__factory } from "./factories/contracts/interfaces/IPikachu__factory";
 export type { Lock } from "./contracts/Lock";
 export { Lock__factory } from "./factories/contracts/Lock__factory";
+export type { Marketplace } from "./contracts/Marketplace";
+export { Marketplace__factory } from "./factories/contracts/Marketplace__factory";
 export type { Pikachu } from "./contracts/Master.sol/Pikachu";
 export { Pikachu__factory } from "./factories/contracts/Master.sol/Pikachu__factory";
 export type { TestNFT } from "./contracts/test/ERC721_TEST.sol/TestNFT";

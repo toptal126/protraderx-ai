@@ -10,6 +10,7 @@ export type TAdminSettingStruct = {
   platformFee: number;
   blockNumberSlippage: number;
   verifiedCollections: string[];
+  stableCoins: string[];
 };
 
 export const useAdminSetting = () => {
@@ -20,6 +21,7 @@ export const useAdminSetting = () => {
     platformFee: 0,
     blockNumberSlippage: 300,
     verifiedCollections: [],
+    stableCoins: [],
   });
 
   const getAdminSetting = useCallback(async () => {
@@ -30,7 +32,11 @@ export const useAdminSetting = () => {
           Pikachu.verifiedCollections(),
         ]);
 
-        setAdminSetting({ ..._adminSetting, verifiedCollections });
+        setAdminSetting({
+          ..._adminSetting,
+          verifiedCollections,
+          stableCoins: [],
+        });
       } catch (error) {
         // setAdminSetting(0);
         console.log(error);

@@ -8,4 +8,5 @@ export type { interfaces };
 import type * as test from "./test";
 export type { test };
 export type { Lock } from "./Lock";
+export type { Marketplace } from "./Marketplace";
 export type { VerifySignature } from "./VerifySignature";

@@ -53,6 +53,10 @@ declare module "hardhat/types/runtime" {
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.Lock__factory>;
     getContractFactory(
+      name: "Marketplace",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.Marketplace__factory>;
+    getContractFactory(
       name: "Pikachu",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.Pikachu__factory>;
@@ -115,6 +119,11 @@ declare module "hardhat/types/runtime" {
       address: string,
       signer?: ethers.Signer
     ): Promise<Contracts.Lock>;
+    getContractAt(
+      name: "Marketplace",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.Marketplace>;
     getContractAt(
       name: "Pikachu",
       address: string,

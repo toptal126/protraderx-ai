@@ -8,6 +8,10 @@ import ConnectButton from "./ConnectButton";
 const Header = () => {
   const pageLinks = [
     {
+      text: "Mortgage",
+      link: "/mortgage",
+    },
+    {
       text: "Borrow",
       link: "/",
     },

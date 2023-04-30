@@ -2,7 +2,7 @@ import { useMemo, useState } from "react";
 import style from "./Assets.module.css";
 import cn from "classnames";
 import { useAccountStore, useSettingStore } from "store";
-import { Input } from "components/ui";
+import { Button, Input } from "components/ui";
 import { SvgFind } from "assets/images/svg";
 import ImageERC721 from "assets/images/no-image.png";
 
@@ -41,11 +41,14 @@ const Assets = () => {
             <span className={cn(style.symbol)}>
               {nft.symbol} #{nft.tokenId}
             </span>
-            {/* <div className={cn(style.actions)}>
-              <Button>
-                <SvgDots />
+            <div className={cn(style.actions)}>
+              <Button variant="yellow" sx="h-8 w-32">
+                List for sale
               </Button>
-            </div> */}
+              <Button variant="gray" sx="h-8 w-32">
+                Cancel listing
+              </Button>
+            </div>
           </div>
         ))}
       </div>

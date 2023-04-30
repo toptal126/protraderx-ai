@@ -208,6 +208,51 @@ const _abi = [
     type: "function",
   },
   {
+    inputs: [],
+    name: "getAdminSetting",
+    outputs: [
+      {
+        components: [
+          {
+            internalType: "address[]",
+            name: "verifiedCollections",
+            type: "address[]",
+          },
+          {
+            internalType: "address[]",
+            name: "stableCoins",
+            type: "address[]",
+          },
+          {
+            internalType: "address",
+            name: "feeTo",
+            type: "address",
+          },
+          {
+            internalType: "uint256",
+            name: "minDepositAmount",
+            type: "uint256",
+          },
+          {
+            internalType: "uint32",
+            name: "platformFee",
+            type: "uint32",
+          },
+          {
+            internalType: "uint32",
+            name: "blockNumberSlippage",
+            type: "uint32",
+          },
+        ],
+        internalType: "struct IPikachu.AdminSetting",
+        name: "",
+        type: "tuple",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
     inputs: [
       {
         internalType: "uint256",
@@ -218,6 +263,19 @@ const _abi = [
     name: "repay",
     outputs: [],
     stateMutability: "payable",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "verifiedCollections",
+    outputs: [
+      {
+        internalType: "address[]",
+        name: "",
+        type: "address[]",
+      },
+    ],
+    stateMutability: "view",
     type: "function",
   },
 ];

@@ -28,13 +28,48 @@ import type {
   PromiseOrValue,
 } from "../../common";
 
+export declare namespace IPikachu {
+  export type AdminSettingStruct = {
+    verifiedCollections: PromiseOrValue<string>[];
+    stableCoins: PromiseOrValue<string>[];
+    feeTo: PromiseOrValue<string>;
+    minDepositAmount: PromiseOrValue<BigNumberish>;
+    platformFee: PromiseOrValue<BigNumberish>;
+    blockNumberSlippage: PromiseOrValue<BigNumberish>;
+  };
+
+  export type AdminSettingStructOutput = [
+    string[],
+    string[],
+    string,
+    BigNumber,
+    number,
+    number
+  ] & {
+    verifiedCollections: string[];
+    stableCoins: string[];
+    feeTo: string;
+    minDepositAmount: BigNumber;
+    platformFee: number;
+    blockNumberSlippage: number;
+  };
+}
+
 export interface IPikachuInterface extends utils.Interface {
   functions: {
     "borrow(uint256,address,uint256,uint256,uint256,bytes,uint256,uint256)": FunctionFragment;
+    "getAdminSetting()": FunctionFragment;
     "repay(uint256)": FunctionFragment;
+    "verifiedCollections()": FunctionFragment;
   };
 
-  getFunction(nameOrSignatureOrTopic: "borrow" | "repay"): FunctionFragment;
+  getFunction(
+    nameOrSignatureOrTopic:
+      | "borrow"
+      | "getAdminSetting"
+      | "repay"
+      | "verifiedCollections"
+  ): FunctionFragment;
 
   encodeFunctionData(
     functionFragment: "borrow",
@@ -50,12 +85,28 @@ export interface IPikachuInterface extends utils.Interface {
     ]
   ): string;
   encodeFunctionData(
+    functionFragment: "getAdminSetting",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
     functionFragment: "repay",
     values: [PromiseOrValue<BigNumberish>]
   ): string;
+  encodeFunctionData(
+    functionFragment: "verifiedCollections",
+    values?: undefined
+  ): string;
 
   decodeFunctionResult(functionFragment: "borrow", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "getAdminSetting",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(functionFragment: "repay", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "verifiedCollections",
+    data: BytesLike
+  ): Result;
 
   events: {
     "CreatedLoan(uint256,address,uint256,address,uint256,uint8,uint256,uint256,uint256)": EventFragment;
@@ -185,10 +236,16 @@ export interface IPikachu extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
+    getAdminSetting(
+      overrides?: CallOverrides
+    ): Promise<[IPikachu.AdminSettingStructOutput]>;
+
     repay(
       _poolId: PromiseOrValue<BigNumberish>,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
+
+    verifiedCollections(overrides?: CallOverrides): Promise<[string[]]>;
   };
 
   borrow(
@@ -203,10 +260,16 @@ export interface IPikachu extends BaseContract {
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
+  getAdminSetting(
+    overrides?: CallOverrides
+  ): Promise<IPikachu.AdminSettingStructOutput>;
+
   repay(
     _poolId: PromiseOrValue<BigNumberish>,
     overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
+
+  verifiedCollections(overrides?: CallOverrides): Promise<string[]>;
 
   callStatic: {
     borrow(
@@ -221,10 +284,16 @@ export interface IPikachu extends BaseContract {
       overrides?: CallOverrides
     ): Promise<void>;
 
+    getAdminSetting(
+      overrides?: CallOverrides
+    ): Promise<IPikachu.AdminSettingStructOutput>;
+
     repay(
       _poolId: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<void>;
+
+    verifiedCollections(overrides?: CallOverrides): Promise<string[]>;
   };
 
   filters: {
@@ -305,10 +374,14 @@ export interface IPikachu extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
+    getAdminSetting(overrides?: CallOverrides): Promise<BigNumber>;
+
     repay(
       _poolId: PromiseOrValue<BigNumberish>,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
+
+    verifiedCollections(overrides?: CallOverrides): Promise<BigNumber>;
   };
 
   populateTransaction: {
@@ -324,9 +397,15 @@ export interface IPikachu extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
+    getAdminSetting(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
     repay(
       _poolId: PromiseOrValue<BigNumberish>,
       overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    verifiedCollections(
+      overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
   };
 }

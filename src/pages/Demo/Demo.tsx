@@ -129,6 +129,7 @@ const Demo = () => {
       maxDuration,
       compoundInterest,
       collections,
+      0,
       { value: depositAmount }
     );
   };
@@ -143,6 +144,7 @@ const Demo = () => {
       verifiedCollections: (verifiedCollectionsRef.current?.value || "")
         .split("\n")
         .map((item) => item.trim()),
+      stableCoins: [],
     };
     await Pikachu.updateAdminSetting(adminSettings);
   };
