@@ -7,7 +7,9 @@ import { IPikachu } from "utils/typechain-types/contracts/Master.sol/Pikachu";
 import {
   beautifyAddress,
   beautifyDecimals,
+  formatEther,
   toFloat,
+  toInteger,
 } from "utils/helpers/string.helpers";
 import {
   SvgArrowDown,
@@ -36,6 +38,7 @@ import {
 
 // import { useAccountStore } from "store";
 import { identicon } from "minidenticons";
+import { useAccountStore } from "store";
 
 interface Props {
   pool: IPikachu.PoolStructOutput;
@@ -44,16 +47,9 @@ interface Props {
 }
 
 const PoolPanel = ({ pool, buttonVisible }: Props) => {
-  // const { allLoans } = useAccountStore();
+  const { allLoans } = useAccountStore();
   const [expanded, setExpanded] = useState(false);
 
-  const availableAmount =
-    59.44 + ((new Date().getTime() - 1677507683 * 1000) / 1000 / 864000) * 2;
-
-  const depositedAmount =
-    841.36 + ((new Date().getTime() - 1677507683 * 1000) / 1000 / 86400) * 3;
-  const borrowerInterest =
-    11.92 + +((new Date().getTime() - 1677507683 * 1000) / 1000 / 864000);
   const data = useMemo(() => {
     const {
       interestType: dynamicInterest,
@@ -77,9 +73,20 @@ const PoolPanel = ({ pool, buttonVisible }: Props) => {
     }));
   }, [pool]);
 
+  const openLoans = useMemo(() => {
+    return allLoans.filter(
+      (item) => item.poolId === toInteger(pool.poolId) && item.status === 1
+    );
+  }, [allLoans, pool]);
+
   return (
     <div className={cn(style.root)}>
-      <div className={cn(style.poolInfo)}>
+      <div
+        className={cn(
+          style.poolInfo,
+          pool.poolType === 0 ? style.lending : style.mortgage
+        )}
+      >
         <span>
           <span className={cn(style.label)}>Creator:</span>
           <div
@@ -93,9 +100,16 @@ const PoolPanel = ({ pool, buttonVisible }: Props) => {
         <span>
           <span className={cn(style.label)}>Available:</span>
           <span className="text-tangerine-yellow">
-            {beautifyDecimals(availableAmount)}
+            {beautifyDecimals(pool.availableAmount)}
           </span>
-          / {beautifyDecimals(depositedAmount)}
+          /{" "}
+          {beautifyDecimals(
+            formatEther(pool.availableAmount) +
+              openLoans.reduce(
+                (prev, next) => prev + formatEther(next.amount),
+                0
+              )
+          )}
           <SvgEthereum />
         </span>
         <span>
@@ -114,35 +128,44 @@ const PoolPanel = ({ pool, buttonVisible }: Props) => {
           / {pool.interestCapRate.toNumber() / 100}%
         </span>
         <span>
-          {buttonVisible && (
-            <>
-              {pool.status === POOL_READY &&
-              pool.availableAmount.gt(BigNumber.from(0)) ? (
-                pool.paused ? (
+          {buttonVisible &&
+            (pool.poolType === 0 ? (
+              <>
+                {pool.status === POOL_READY &&
+                pool.availableAmount.gt(BigNumber.from(0)) ? (
+                  pool.paused ? (
+                    <Button
+                      variant="gray"
+                      sx="h-8 w-28 md:h-10 md:w-36"
+                      disabled
+                    >
+                      Paused
+                    </Button>
+                  ) : (
+                    <LinkWithSearchParams
+                      to={{ pathname: `/pool/${pool.owner}/${pool.poolId}` }}
+                    >
+                      <Button variant="yellow" sx="h-8 w-28 md:h-10 md:w-36">
+                        Borrow Now
+                      </Button>
+                    </LinkWithSearchParams>
+                  )
+                ) : (
+                  <Button variant="gray" sx="h-8 w-28 md:h-10 md:w-36" disabled>
+                    Insufficient
+                  </Button>
+                )}
+                {pool.status === POOL_DISABLED && (
                   <Button variant="gray" sx="h-8 w-28 md:h-10 md:w-36" disabled>
                     Paused
                   </Button>
-                ) : (
-                  <LinkWithSearchParams
-                    to={{ pathname: `/pool/${pool.owner}/${pool.poolId}` }}
-                  >
-                    <Button variant="yellow" sx="h-8 w-28 md:h-10 md:w-36">
-                      Borrow Now
-                    </Button>
-                  </LinkWithSearchParams>
-                )
-              ) : (
-                <Button variant="gray" sx="h-8 w-28 md:h-10 md:w-36" disabled>
-                  Insufficient
-                </Button>
-              )}
-              {pool.status === POOL_DISABLED && (
-                <Button variant="gray" sx="h-8 w-28 md:h-10 md:w-36" disabled>
-                  Paused
-                </Button>
-              )}
-            </>
-          )}
+                )}
+              </>
+            ) : (
+              <Button variant="yellow" sx="h-8 w-28 md:h-10 md:w-36">
+                Mortgage
+              </Button>
+            ))}
           <Button
             variant="blue"
             sx={`h-8 md:h-10 w-8 md:w-10 ml-auto ${
@@ -160,15 +183,15 @@ const PoolPanel = ({ pool, buttonVisible }: Props) => {
           <div className={cn(style.loanInfo)}>
             <div>
               <span>Loans made: </span>
-              <span>{24}</span>
+              <span>{toInteger(pool.numberOfLoans)}</span>
             </div>
             <div>
               <span>Open loans: </span>
-              <span>{2}</span>
+              <span>{toInteger(pool.numberOfOpenLoans)}</span>
             </div>
             <div>
               <span>Liquidations: </span>
-              <span>{3}</span>
+              <span>{toInteger(pool.numberOfLiquidations)}</span>
             </div>
             <div>
               <span>Max duration: </span>
@@ -177,7 +200,7 @@ const PoolPanel = ({ pool, buttonVisible }: Props) => {
             <div>
               <span>Max amount: </span>
               <span>
-                {45}
+                {formatEther(pool.maxAmount)}
                 <SvgEthereum />
               </span>
             </div>
@@ -191,7 +214,7 @@ const PoolPanel = ({ pool, buttonVisible }: Props) => {
                 </div>
                 <div>
                   <span>Interest earned:</span>
-                  <span>{beautifyDecimals(borrowerInterest)} ETH</span>
+                  <span>{beautifyDecimals(pool.totalInterest)} ETH</span>
                 </div>
               </div>
               <div className={cn(style.chart)}>

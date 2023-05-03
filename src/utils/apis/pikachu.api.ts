@@ -1,6 +1,7 @@
 import axios from "axios";
 import { NFTItem } from "store";
 import { API_URL } from "utils/constants/api.constants";
+import { TListingStruct } from "utils/hooks/pikachu/useListings";
 import { TLoanStruct } from "utils/hooks/pikachu/usePools";
 
 export const getSignature = async (
@@ -55,15 +56,20 @@ export const getLoansByBorrower = async (
   const _response = await axios.get(`${API_URL}/loans/borrower/${borrower}`);
   return _response.data;
 };
+
 export const updateListingItem = async (
   item: NFTItem,
   isActive: boolean,
-  price: number
+  price: number,
+  seller: string
 ): Promise<TLoanStruct[]> => {
   const _response = await axios.put(`${API_URL}/marketplace`, {
-    item,
-    isActive,
-    price,
+    item: { ...item, seller, isActive, price },
   });
+  return _response.data;
+};
+
+export const fetchAllListedItems = async (): Promise<TListingStruct[]> => {
+  const _response = await axios.get(`${API_URL}/marketplace`);
   return _response.data;
 };

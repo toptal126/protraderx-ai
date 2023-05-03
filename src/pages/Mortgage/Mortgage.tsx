@@ -1,72 +1,90 @@
 import { useMemo, useState } from "react";
 import style from "./Mortgage.module.css";
 import cn from "classnames";
-import { NFTItem, useAccountStore, useSettingStore } from "store";
+import { useAccountStore, useSettingStore } from "store";
 import { Button, Input } from "components/ui";
 import { SvgEthereum, SvgFind } from "assets/images/svg";
 import ImageERC721 from "assets/images/no-image.png";
-import { useSaleObjects } from "utils/hooks/pikachu/useListings";
-import { ListSaleModal } from "components/Mortgage";
+import {
+  TListingStruct,
+  useAllListings,
+} from "utils/hooks/pikachu/useListings";
+import { MortgageModal } from "components/Mortgage";
 import { useMarketplaceContract } from "utils/hooks/useContract";
-import { beautifyDecimals } from "utils/helpers/string.helpers";
-import { updateListingItem } from "utils/apis/pikachu.api";
+import { ethers } from "ethers";
+import { refreshPools, updateListingItem } from "utils/apis/pikachu.api";
 
 const Mortgage = () => {
-  const [listingModalVisible, setListingModalVisible] = useState(false);
+  const { address } = useAccountStore();
 
   const {
     setTxConfirmationModalVisible,
     setTxDescription,
     submitTransaction,
     setRefreshedAt,
-    collections,
   } = useSettingStore();
-  const { nfts } = useAccountStore();
+
+  const [mortgageModalVisible, setMortgageModalVisible] = useState(false);
+
+  const listedItems = useAllListings();
   const marketplace = useMarketplaceContract();
 
   const [query, setQuery] = useState("");
 
   const validItems = useMemo(() => {
-    return nfts
-      .filter((nft) =>
-        collections.find((collection) => collection.contract === nft.contract)
-      )
-      .filter(
-        (item) =>
-          item.name.includes(query) ||
-          item.symbol.includes(query) ||
-          item.tokenId.toString().includes(query)
-      );
-  }, [nfts, collections, query]);
+    return listedItems.filter(
+      (item) =>
+        item.name.includes(query) ||
+        item.symbol.includes(query) ||
+        item.tokenId.toString().includes(query)
+    );
+  }, [listedItems, query]);
 
-  const saleObjects = useSaleObjects(validItems);
-
-  const [selectedNft, setSelectedNft] = useState<NFTItem>({
+  const [selectedNft, setSelectedNft] = useState<TListingStruct>({
     contract: "",
-    tokenId: 0,
+    imgUrl: "",
+    isActive: true,
     name: "",
+    price: 0,
+    seller: "",
     symbol: "",
+    tokenId: 0,
   });
-  const onListSale = async (nft: NFTItem) => {
-    setSelectedNft(nft);
-    setListingModalVisible(true);
-  };
-  const onCancelListing = async (nft: NFTItem) => {
-    setTxDescription("Cancel listing for sale");
+  const onBuy = async (nft: TListingStruct) => {
+    setTxDescription(
+      `Purchase ${nft.symbol}#${nft.tokenId} for ${nft.price}ETH`
+    );
     setTxConfirmationModalVisible(true);
     submitTransaction(
-      marketplace.cancelSale(nft.contract, nft.tokenId),
+      marketplace.buy(nft.contract, nft.tokenId, {
+        value: ethers.utils.parseEther(nft.price.toString()),
+      }),
       async () => {
+        await refreshPools();
+        await updateListingItem(nft, false, 0, address);
         setRefreshedAt(new Date());
-        await updateListingItem(nft, false, 0);
       }
     );
   };
+
+  const onRequestMortgage = async (nft: TListingStruct) => {
+    setSelectedNft(nft);
+    setMortgageModalVisible(true);
+  };
   return (
     <div className={cn(style.root)}>
-      <ListSaleModal
-        visible={listingModalVisible}
-        setVisible={setListingModalVisible}
+      <Button
+        onClick={async () => {
+          await refreshPools();
+          // await updateListingItem(nft, false, 0, address);
+          setRefreshedAt(new Date());
+        }}
+      >
+        test
+      </Button>
+      <MortgageModal
+        visible={mortgageModalVisible}
+        setVisible={setMortgageModalVisible}
         nft={selectedNft}
       />
       <Input
@@ -82,30 +100,37 @@ const Mortgage = () => {
             <img src={nft.imgUrl || ImageERC721} alt={nft.name} />
             <span className={cn(style.symbol)}>
               {nft.symbol} #{nft.tokenId}
-              {saleObjects[index]?.active && (
-                <span className={cn(style.price)}>
-                  {beautifyDecimals(saleObjects[index].price)}
-                  <SvgEthereum />
-                </span>
-              )}
+              <span className={cn(style.price)}>
+                {nft.price}
+                <SvgEthereum />
+              </span>
             </span>
             <div className={cn(style.actions)}>
-              {saleObjects[index]?.active ? (
-                <Button
-                  variant="gray"
-                  sx="h-8 w-32"
-                  onClick={() => onCancelListing(nft)}
-                >
+              {nft.seller === address && (
+                <Button variant="gray" sx="h-8 w-32">
                   Cancel listing
                 </Button>
-              ) : (
-                <Button
-                  variant="yellow"
-                  sx="h-8 w-32"
-                  onClick={() => onListSale(nft)}
-                >
-                  List for sale
-                </Button>
+              )}
+              {nft.seller !== address && (
+                <>
+                  <span>Purchase</span>
+                  <div className={cn(style.payments)}>
+                    <Button
+                      variant="blue"
+                      sx="h-8 w-24"
+                      onClick={() => onBuy(nft)}
+                    >
+                      Full Pay
+                    </Button>
+                    <Button
+                      variant="yellow"
+                      sx="h-8 w-24"
+                      onClick={() => onRequestMortgage(nft)}
+                    >
+                      Down Pay
+                    </Button>
+                  </div>
+                </>
               )}
             </div>
           </div>

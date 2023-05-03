@@ -79,7 +79,9 @@ const PoolCreateDrawer = ({ setVisible }: IProps) => {
         setTxRejectModalVisible(true);
         return;
       }
-      setTxDescription("Creating Pool...");
+      setTxDescription(
+        `Creating ${isForLending ? "Lending" : "Mortgage"} Pool...`
+      );
       setTxConfirmationModalVisible(true);
       submitTransaction(
         Pikachu.createPool(

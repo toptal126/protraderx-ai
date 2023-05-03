@@ -4,6 +4,7 @@ import { NFTItem, useAccountStore, useSettingStore } from "store";
 import { useERC721Contract, useMarketplaceContract } from "../useContract";
 import { BigNumberish } from "ethers";
 import { useMarketplaceAddress } from "../useAddress";
+import { fetchAllListedItems } from "utils/apis/pikachu.api";
 
 export type TSaleStruct = {
   nftAddress: string;
@@ -11,6 +12,17 @@ export type TSaleStruct = {
   seller: string;
   price: BigNumberish;
   active: boolean;
+};
+
+export type TListingStruct = {
+  contract: string;
+  name: string;
+  symbol: string;
+  seller: string;
+  imgUrl: string;
+  tokenId: number;
+  price: number;
+  isActive: boolean;
 };
 
 export const useSaleObjects = (nfts: NFTItem[]) => {
@@ -68,4 +80,28 @@ export const useIsApprovedForAll = (nft: NFTItem) => {
   }, [getResult, nft, refreshedAt]);
 
   return isApprovedForAll;
+};
+
+export const useAllListings = () => {
+  const [items, setItems] = useState<TListingStruct[]>([]);
+
+  const { refreshedAt } = useSettingStore();
+
+  const getResult = useCallback(async () => {
+    try {
+      const _items = await fetchAllListedItems();
+      setItems(_items);
+    } catch (error) {
+      setItems([]);
+      console.log(error);
+    }
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  useEffect(() => {
+    getResult();
+  }, [getResult, refreshedAt]);
+
+  return items;
 };

@@ -8,7 +8,6 @@ import { useAccountStore } from "store";
 const OpenLoans = () => {
   const { loans } = useAccountStore();
   const openLoans = loans.filter((item) => item.status === 1);
-
   return (
     <div className={cn(style.root)}>
       <div className={cn(style.head)}>

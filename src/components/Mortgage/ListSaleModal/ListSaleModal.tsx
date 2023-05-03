@@ -3,7 +3,7 @@ import cn from "classnames";
 import style from "./ListSaleModal.module.css";
 import { AceModal, Button, Input } from "components/ui";
 import CloseButton from "components/ui/CloseButton";
-import { NFTItem, useSettingStore } from "store";
+import { NFTItem, useAccountStore, useSettingStore } from "store";
 import { SvgEthereum } from "assets/images/svg";
 import {
   useERC721Contract,
@@ -23,6 +23,8 @@ type IProps = {
 
 const ListSaleModal = ({ visible, setVisible, nft }: IProps) => {
   const [amount, setAmount] = useState("");
+
+  const { address } = useAccountStore();
 
   const marketplace = useMarketplaceContract();
   const {
@@ -63,7 +65,7 @@ const ListSaleModal = ({ visible, setVisible, nft }: IProps) => {
       ),
       async () => {
         setRefreshedAt(new Date());
-        await updateListingItem(nft, true, toFloat(amount));
+        await updateListingItem(nft, true, toFloat(amount), address);
       }
     );
   };

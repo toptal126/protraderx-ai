@@ -101,7 +101,7 @@ body {
 
   [type="radio"]:checked,
   [type="checkbox"]:checked {
-    background-image: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTIiIGhlaWdodD0iMTQiIHZpZXdCb3g9IjAgMCAxMiAxNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTIuMTk3NDIgOS42OEgwLjQ1NzQyMlY3LjQ0SDMuODc3NDJMNS4xNTc0MiAxMC45NEg1LjI3NzQyTDkuMjk3NDIgLTkuNTM2NzRlLTA3SDExLjkzNzRMNi42Mzc0MiAxNEgzLjg3NzQyTDIuMTk3NDIgOS42OFoiIGZpbGw9IndoaXRlIi8+Cjwvc3ZnPgo=);
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='14' viewBox='0 0 12 14' fill='none'%3E%3Cpath d='M2.19742 9.68H0.457422V7.44H3.87742L5.15742 10.94H5.27742L9.29742 -9.53674e-07H11.9374L6.63742 14H3.87742L2.19742 9.68Z' fill='%23342FFF'/%3E%3C/svg%3E");
     background-position: 50%;
     background-repeat: no-repeat;
     background-size: 60% 60%;
@@ -110,7 +110,7 @@ body {
 
   [type="checkbox"],
   [type="radio"] {
-    @apply focus:border-white cursor-pointer;
+    @apply focus:border-[#342FFF] cursor-pointer;
     print-color-adjust: exact;
     --tw-shadow: 0 0 #0000;
     -webkit-appearance: none;
@@ -120,7 +120,7 @@ body {
     background-size: 0% 0%;
     /* background-color: #fff; */
     background-origin: border-box;
-    background: rgba(255, 255, 255, 0.3);
+    background: #342fff11;
     border-radius: 4px;
     color: #1c64f2;
     display: inline-block;

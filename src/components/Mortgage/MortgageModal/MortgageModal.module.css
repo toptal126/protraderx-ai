@@ -1,0 +1,92 @@
+.root {
+  @apply flex flex-col bg-raisin-black rounded-[10px] mt-auto;
+
+  @apply w-[90vw];
+
+  @screen md {
+    @apply w-[100vw];
+  }
+
+  .header {
+    @apply flex justify-between mx-2 md:mx-24 py-2 md:py-7 items-center text-xl font-bold;
+  }
+
+  .body {
+    @apply my-2 px-2 md:my-4 md:px-32 flex flex-col md:flex-row gap-x-16 gap-y-2;
+
+    img {
+      @apply w-full md:w-64 bg-gray-900/10 rounded-lg;
+    }
+    & > .values {
+      @apply flex flex-col;
+
+      & > span {
+        @apply flex items-center whitespace-nowrap mt-4 mb-2 font-medium;
+        svg {
+          @apply ml-2;
+        }
+      }
+    }
+
+    & > .review {
+      @apply flex flex-col border-l-2 pl-8 flex-1;
+
+      & > span {
+        @apply flex items-center whitespace-nowrap mt-4 mb-2 font-medium;
+
+        .stressed1,
+        .stressed2 {
+          @apply mx-2 px-2 py-0.5 rounded-lg flex items-center gap-x-1;
+        }
+
+        .stressed1 {
+          @apply bg-plochere/30;
+        }
+
+        .stressed2 {
+          @apply bg-[#37AB4540];
+        }
+      }
+    }
+    & > .confirm {
+      @apply flex flex-col border-l-2 pl-8 gap-y-4 items-start;
+
+      .stressed1,
+      .stressed2 {
+        @apply px-2 py-1 rounded-lg flex items-center gap-x-1;
+
+        .avatar {
+          @apply w-8 h-8 bg-white rounded-lg;
+        }
+      }
+
+      .stressed1 {
+        @apply bg-plochere/30;
+      }
+
+      .stressed2 {
+        @apply bg-[#37AB4540];
+      }
+
+      button {
+        @apply w-48 text-xl py-2;
+      }
+    }
+  }
+
+  .footer {
+    @apply flex m-2 md:m-6 gap-x-10 justify-center;
+
+    button {
+      @apply h-8 w-28 md:h-10 md:w-[140px];
+    }
+  }
+}
+
+.inputIcon {
+  @apply flex items-center text-tangerine-yellow cursor-pointer hover:opacity-70;
+
+  svg {
+    @apply ml-2;
+  }
+}

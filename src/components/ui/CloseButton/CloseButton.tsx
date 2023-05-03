@@ -2,7 +2,7 @@ const CloseButton = ({ setModalVisible }: { setModalVisible: any }) => {
   return (
     <button
       type="button"
-      className="bg-transparent rounded-lg text-sm p-1.5 inline-flex items-center hover:bg-gray-600"
+      className="bg-transparent rounded-lg text-sm p-1.5 inline-flex items-center hover:bg-gray-300"
       onClick={() => setModalVisible(false)}
     >
       <svg

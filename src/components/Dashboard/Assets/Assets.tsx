@@ -21,7 +21,7 @@ const Assets = () => {
     setRefreshedAt,
     collections,
   } = useSettingStore();
-  const { nfts } = useAccountStore();
+  const { nfts, address } = useAccountStore();
   const marketplace = useMarketplaceContract();
 
   const [query, setQuery] = useState("");
@@ -58,7 +58,7 @@ const Assets = () => {
       marketplace.cancelSale(nft.contract, nft.tokenId),
       async () => {
         setRefreshedAt(new Date());
-        await updateListingItem(nft, false, 0);
+        await updateListingItem(nft, false, 0, address);
       }
     );
   };

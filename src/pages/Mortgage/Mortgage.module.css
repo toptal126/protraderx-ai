@@ -22,9 +22,13 @@
       .actions {
         @apply ml-auto mr-4 mb-3;
 
-        /* button {
-          @apply bg-black/10 hover:bg-black/20;
-        } */
+        span {
+          @apply text-plochere font-bold;
+        }
+
+        .payments {
+          @apply flex gap-x-4;
+        }
       }
     }
   }
