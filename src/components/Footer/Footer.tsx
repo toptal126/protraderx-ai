@@ -14,7 +14,7 @@ const Footer = () => {
   ];
   return (
     <footer className={cn(style.root)}>
-      <span>©2022 Pikachu.fi Ltd. All rights reserved.</span>
+      <span>©2022 ProtradeX.Pro Ltd. All rights reserved.</span>
       <div className={cn(style.externalLinks)}>
         {externalLinks.map((link, index) => (
           <a

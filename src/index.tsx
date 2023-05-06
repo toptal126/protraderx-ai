@@ -17,7 +17,7 @@ const { chains, provider } = configureChains(
 );
 
 const { connectors } = getDefaultWallets({
-  appName: "Pikachu Finance",
+  appName: "ProtradeX",
   chains,
 });
 

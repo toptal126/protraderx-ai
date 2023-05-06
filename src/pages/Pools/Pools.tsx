@@ -25,7 +25,7 @@ const Pools = () => {
           target="_blank"
           rel="noreferrer"
         >
-          How to use PIKACHU.FI
+          How to use ProtradeX
           <SvgLink />
         </a>
       </div>
