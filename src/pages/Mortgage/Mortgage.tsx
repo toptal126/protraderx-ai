@@ -13,6 +13,7 @@ import { MortgageModal } from "components/Mortgage";
 import { useMarketplaceContract } from "utils/hooks/useContract";
 import { ethers } from "ethers";
 import { refreshPools, updateListingItem } from "utils/apis/pikachu.api";
+import PlatformStatus from "components/Common/PlatformStatus/PlatformStatus";
 
 const Mortgage = () => {
   const { address } = useAccountStore();
@@ -73,7 +74,11 @@ const Mortgage = () => {
   };
   return (
     <div className={cn(style.root)}>
-      <Button
+      <div className={cn(style.heading)}>
+        <h3>Get Now and Pay Later!</h3>
+        <PlatformStatus />
+      </div>
+      {/* <Button
         onClick={async () => {
           await refreshPools();
           // await updateListingItem(nft, false, 0, address);
@@ -81,7 +86,7 @@ const Mortgage = () => {
         }}
       >
         test
-      </Button>
+      </Button> */}
       <MortgageModal
         visible={mortgageModalVisible}
         setVisible={setMortgageModalVisible}
