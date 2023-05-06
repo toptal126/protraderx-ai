@@ -10,17 +10,17 @@
       .adminSettings,
       .poolsBox,
       .loanConfig {
-        @apply w-full flex flex-col items-start gap-2 p-4 border-2 bg-[#0D0D0D] border-slate-600;
+        @apply w-full flex flex-col items-start gap-2 p-4 border-2 bg-[#fDfDfD] border-slate-600;
 
         .pool {
-          @apply flex flex-col w-full p-2 gap-1 bg-[#554609];
+          @apply flex flex-col w-full p-2 gap-1 bg-[#fdfdfd];
 
           span {
             @apply flex items-center gap-1;
           }
         }
         .loan {
-          @apply flex flex-col w-full p-2 gap-1 bg-[#554609];
+          @apply flex flex-col w-full p-2 gap-1 bg-[#fdfdfd];
 
           span {
             @apply flex items-center gap-1;

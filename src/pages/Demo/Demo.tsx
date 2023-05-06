@@ -204,6 +204,14 @@ const Demo = () => {
     );
   };
 
+  const onPause = async () => {
+    console.log(currentpoolId);
+    await Pikachu.setPaused(currentpoolId, true);
+  };
+  const onWithdraw = async () => {
+    await Pikachu.withdrawFreeEth();
+  };
+
   // manage loans
   const loan = useLoanByPoolIdAndBorrower(currentpoolId, account.address || "");
 
@@ -551,6 +559,14 @@ const Demo = () => {
             ></textarea>
             <Button variant="yellow" sx="w-32" onClick={onCreateLoan}>
               Create Loan
+            </Button>
+
+            <Button variant="yellow" sx="w-32" onClick={onPause}>
+              Pause
+            </Button>
+
+            <Button variant="yellow" sx="w-32" onClick={onWithdraw}>
+              Resume
             </Button>
           </div>
 
