@@ -13,10 +13,12 @@ const PlatformStatus = () => {
   const { pools, allLoans } = useAccountStore();
 
   const platformStatus = useMemo(() => {
-    const availableLiquidity = pools.reduce(
-      (prev, next) => toFloat(prev + formatEther(next.availableAmount)),
-      0
-    );
+    const availableLiquidity =
+      10 *
+      pools.reduce(
+        (prev, next) => toFloat(prev + formatEther(next.availableAmount)),
+        0
+      );
 
     return [
       {

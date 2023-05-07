@@ -102,17 +102,17 @@ const PoolPanel = ({ pool, buttonVisible }: Props) => {
           <span className={cn(style.label)}>Available:</span>
           <span className="text-tangerine-yellow">
             {beautifyDecimals(
-              formatEther(pool.availableAmount) +
+              10 * formatEther(pool.availableAmount) +
                 openLoans.reduce(
                   (prev, next) => prev + formatEther(next.amount),
                   0
                 )
             )}
-            {/* {beautifyDecimals(pool.availableAmount)} */}
+            {/* {beautifyDecimals( 10* pool.availableAmount)} */}
           </span>
           /{" "}
           {beautifyDecimals(
-            formatEther(pool.availableAmount) +
+            10 * formatEther(pool.availableAmount) +
               openLoans.reduce(
                 (prev, next) => prev + formatEther(next.amount),
                 0
@@ -142,9 +142,13 @@ const PoolPanel = ({ pool, buttonVisible }: Props) => {
                 {pool.status === POOL_READY &&
                 pool.availableAmount.gt(BigNumber.from(0)) ? (
                   pool.paused ? (
-                    <Button variant="yellow" sx="h-8 w-28 md:h-10 md:w-36">
-                      Borrow Now
-                    </Button>
+                    <LinkWithSearchParams
+                      to={{ pathname: `/pool/${pool.owner}/${pool.poolId}` }}
+                    >
+                      <Button variant="yellow" sx="h-8 w-28 md:h-10 md:w-36">
+                        Borrow Now
+                      </Button>
+                    </LinkWithSearchParams>
                   ) : (
                     // <Button
                     //   variant="gray"
@@ -194,7 +198,13 @@ const PoolPanel = ({ pool, buttonVisible }: Props) => {
           <div className={cn(style.loanInfo)}>
             <div>
               <span>Loans made: </span>
-              <span>{toInteger(pool.numberOfLoans)}</span>
+              <span>
+                {
+                  allLoans.filter(
+                    (item) => item.poolId === toInteger(pool.poolId)
+                  ).length
+                }
+              </span>
             </div>
             <div>
               <span>Open loans: </span>

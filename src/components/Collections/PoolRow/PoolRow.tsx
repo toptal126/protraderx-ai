@@ -39,9 +39,9 @@ const PoolRow = ({ pool, floorPrice }: Props) => {
       <div>
         <span className={cn(style.label)}>Avalabile/Total: </span>
         <span className="text-tangerine-yellow">
-          {beautifyDecimals(formatEther(pool.availableAmount))}
+          {beautifyDecimals(10 * formatEther(pool.availableAmount))}
         </span>{" "}
-        / {beautifyDecimals(formatEther(pool.depositedAmount))}
+        / {beautifyDecimals(10 * formatEther(pool.depositedAmount))}
         <SvgEthereum />
       </div>
       <div>
