@@ -5,6 +5,7 @@ import axios from "axios";
 import { API_URL } from "utils/constants/api.constants";
 import { ContractTransaction, ethers } from "ethers";
 import { getEtherPrice } from "utils/apis/etherscan.api";
+import { IGNORE_LISTS } from "utils/constants/address.constant";
 
 interface ISettingState {
   etherusd: number;
@@ -91,7 +92,7 @@ export const useSettingStore = create<ISettingState>((set, get) => ({
       axios.post(`${API_URL}/pools/collections`, {
         verifiedCollections: _setting.verifiedCollections.map((item) =>
           item.toLowerCase()
-        ),
+        ).filter(item => IGNORE_LISTS.indexOf(item) === -1),
       }),
       getEtherPrice(),
     ]);
