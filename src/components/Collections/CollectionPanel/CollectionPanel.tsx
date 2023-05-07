@@ -59,7 +59,7 @@ const CollectionPanel = ({ collection, index }: Props) => {
       <div className={cn(style.collectionInfo)}>
         <div>{index + 1}</div>
         <div className={cn(style.nftImg)}>
-          <img src={ImageERC721} alt="nft" />
+          <img src={collection.imageUrl || ImageERC721} alt="nft" />
           <div>
             <span className={cn(style.collectionName)}>{collection.name}</span>
             <span className="flex md:hidden items-center gap-x-2">

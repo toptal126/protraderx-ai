@@ -21,7 +21,7 @@ const Pools = () => {
         Borrow ETH with your NFTs within 5 minutes and get instant NFT Liquidity
         on Ethereum.
         <a
-          href="https://github.com/Pikachu-finance"
+          href="https://protradex-pro.gitbook.io/protradex-pro/"
           target="_blank"
           rel="noreferrer"
         >

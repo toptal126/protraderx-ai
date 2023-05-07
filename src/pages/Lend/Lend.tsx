@@ -39,7 +39,7 @@ const Lend = () => {
               Create a pool in 5 minutes and provide instant NFT Liquidity on
               Ethereum.
               <a
-                href="https://github.com/Pikachu-finance"
+                href="https://protradex-pro.gitbook.io/protradex-pro/"
                 target="_blank"
                 rel="noreferrer"
               >

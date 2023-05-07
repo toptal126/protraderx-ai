@@ -12,7 +12,7 @@ import { chain, configureChains, createClient, WagmiConfig } from "wagmi";
 import { publicProvider } from "wagmi/providers/public";
 
 const { chains, provider } = configureChains(
-  [chain.polygonMumbai, chain.mainnet],
+  [chain.mainnet, chain.polygonMumbai],
   [publicProvider()]
 );
 
