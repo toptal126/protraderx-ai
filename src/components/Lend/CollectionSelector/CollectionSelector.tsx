@@ -120,7 +120,7 @@ const CollectionSelector = ({ options, setOptions }: Props) => {
                 }}
               >
                 <img
-                  src={nftImage}
+                  src={nft.imageUrl || nftImage}
                   alt="collection"
                   className={cn(style.nftImg)}
                 />

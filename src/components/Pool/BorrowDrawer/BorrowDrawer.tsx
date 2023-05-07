@@ -91,7 +91,7 @@ const Borrow = ({ pool, setVisible }: IProps) => {
 
       if (operator !== Pikachu.address && isApprovedForAll === false) {
         setTxDescription(
-          "Need to approve Pikachu to collateralize your NFT..."
+          "Need to approve ProtradeX to collateralize your NFT..."
         );
         const txObj = await nftContract.approve(
           Pikachu.address,

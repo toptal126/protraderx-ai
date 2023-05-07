@@ -38,7 +38,7 @@ import {
 
 // import { useAccountStore } from "store";
 import { identicon } from "minidenticons";
-import { useAccountStore } from "store";
+import { useAccountStore, useSettingStore } from "store";
 
 interface Props {
   pool: IPikachu.PoolStructOutput;
@@ -48,6 +48,7 @@ interface Props {
 
 const PoolPanel = ({ pool, buttonVisible }: Props) => {
   const { allLoans } = useAccountStore();
+  const { collections } = useSettingStore();
   const [expanded, setExpanded] = useState(false);
 
   const data = useMemo(() => {
@@ -263,7 +264,28 @@ const PoolPanel = ({ pool, buttonVisible }: Props) => {
 
               <div className={cn(style.collectionsList)}>
                 {pool.collections.map((collection, index) => (
-                  <img key={index} src={ImageERC721} alt="erc721" />
+                  <div className={cn(style.form, "tooltip-container")}>
+                    <span className={cn(style.tooltip, "tooltip top")}>
+                      {
+                        collections.find(
+                          (item) =>
+                            item.contract.toLowerCase() ===
+                            collection.toLowerCase()
+                        )?.name
+                      }
+                    </span>
+                    <img
+                      key={index}
+                      src={
+                        collections.find(
+                          (item) =>
+                            item.contract.toLowerCase() ===
+                            collection.toLowerCase()
+                        )?.imageUrl || ImageERC721
+                      }
+                      alt="erc721"
+                    />
+                  </div>
                 ))}
               </div>
             </div>

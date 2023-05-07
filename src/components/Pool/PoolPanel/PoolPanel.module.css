@@ -79,6 +79,10 @@
 
         .collectionsList {
           @apply flex flex-wrap gap-4;
+
+          img {
+            @apply w-16 h-16 rounded-lg;
+          }
         }
       }
     }

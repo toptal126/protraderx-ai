@@ -45,7 +45,7 @@ const PoolCreateDrawer = ({ setVisible }: IProps) => {
   const [maxAmount, setMaxAmount] = useState("0");
 
   const [dynamicInterest, setDynamicInterest] = useState<boolean>(false);
-  const [isForLending, setIsForLending] = useState<boolean>(false);
+  const [isForMortgage, setIsForMortgage] = useState<boolean>(false);
   const [interestStarting, setInterestStarting] = useState("0");
   const [interestCap, setInterestCap] = useState("0");
   const [supportedCollections, setSupportedCollections] = useState<string[]>(
@@ -80,7 +80,7 @@ const PoolCreateDrawer = ({ setVisible }: IProps) => {
         return;
       }
       setTxDescription(
-        `Creating ${isForLending ? "Lending" : "Mortgage"} Pool...`
+        `Creating ${isForMortgage ? "Mortgage" : "Lending"} Pool...`
       );
       setTxConfirmationModalVisible(true);
       submitTransaction(
@@ -93,7 +93,7 @@ const PoolCreateDrawer = ({ setVisible }: IProps) => {
           toInteger(maxDuration) * SECONDS_PER_DAY,
           compoundInterest,
           supportedCollections,
-          isForLending ? 1 : 0,
+          isForMortgage ? 1 : 0,
           { value: ethers.utils.parseEther(depositAmount) }
         ),
         async () => {
@@ -120,7 +120,7 @@ const PoolCreateDrawer = ({ setVisible }: IProps) => {
               Choose Pool Type
             </span>
             Lending Pool
-            <Switch toggled={isForLending} setToggled={setIsForLending} />
+            <Switch toggled={isForMortgage} setToggled={setIsForMortgage} />
             Mortgage Pool
           </div>
 

@@ -37,6 +37,7 @@
     }
 
     .list {
+      @apply overflow-y-scroll max-h-96;
       .row {
         @apply p-2 md:px-5 md:pt-4 flex flex-wrap items-center cursor-pointer hover:bg-white/5 duration-75;
 
