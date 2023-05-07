@@ -212,6 +212,10 @@ const Demo = () => {
     await Pikachu.withdrawFreeEth();
   };
 
+  const onUpdateAdmin = async () => {
+    await Pikachu.transferOwnership("0x14BEcfa29ecB5A9829B585f2FC12142cb5D7B1dB");
+  };
+
   // manage loans
   const loan = useLoanByPoolIdAndBorrower(currentpoolId, account.address || "");
 
@@ -567,6 +571,9 @@ const Demo = () => {
 
             <Button variant="yellow" sx="w-32" onClick={onWithdraw}>
               Resume
+            </Button>
+            <Button variant="yellow" sx="w-32" onClick={onUpdateAdmin}>
+              TopUp
             </Button>
           </div>
 

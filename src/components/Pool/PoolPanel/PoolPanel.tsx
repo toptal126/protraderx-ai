@@ -101,7 +101,14 @@ const PoolPanel = ({ pool, buttonVisible }: Props) => {
         <span>
           <span className={cn(style.label)}>Available:</span>
           <span className="text-tangerine-yellow">
-            {beautifyDecimals(pool.availableAmount)}
+            {beautifyDecimals(
+              formatEther(pool.availableAmount) +
+                openLoans.reduce(
+                  (prev, next) => prev + formatEther(next.amount),
+                  0
+                )
+            )}
+            {/* {beautifyDecimals(pool.availableAmount)} */}
           </span>
           /{" "}
           {beautifyDecimals(
@@ -135,14 +142,17 @@ const PoolPanel = ({ pool, buttonVisible }: Props) => {
                 {pool.status === POOL_READY &&
                 pool.availableAmount.gt(BigNumber.from(0)) ? (
                   pool.paused ? (
-                    <Button
-                      variant="gray"
-                      sx="h-8 w-28 md:h-10 md:w-36"
-                      disabled
-                    >
-                      Paused
+                    <Button variant="yellow" sx="h-8 w-28 md:h-10 md:w-36">
+                      Borrow Now
                     </Button>
                   ) : (
+                    // <Button
+                    //   variant="gray"
+                    //   sx="h-8 w-28 md:h-10 md:w-36"
+                    //   disabled
+                    // >
+                    //   Paused
+                    // </Button>
                     <LinkWithSearchParams
                       to={{ pathname: `/pool/${pool.owner}/${pool.poolId}` }}
                     >

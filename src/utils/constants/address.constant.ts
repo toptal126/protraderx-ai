@@ -29,6 +29,6 @@ export const NFT_2_ADDRESSES = {
 // BAYC 0x125959ba368624fd44f0fed9825ee313e0b5d357
 
 
-export const IGNORE_LISTS = [
-  "0x08d7c0242953446436f34b4c78fe9da38c73668d"
-]
+export const IGNORE_LISTS : string[] = [
+  // "0x08d7c0242953446436f34b4c78fe9da38c73668d"
+];
